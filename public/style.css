@@ -32,22 +32,26 @@ button {
   margin-left: 20%;
   padding-left: -100px;
   width: 150px;
-  height: 60px;
+  height: 90px;
   background-color: #ffffff;
   border: 2px solid gray;
 }
 button:hover {
   background-color: brown;
 }
-#vsave{
+#vsave {
+  margin-top: -50px;
   visibility: hidden;
   /* visibility: inherit; */
 }
-#vsave1{
+#vsave1 {
+  margin-top: -350px;
   visibility: hidden;
   /* visibility: inherit; */
 }
-#vsave2{
+#vsave2 {
+  margin-top: -350px;
+
   visibility: hidden;
   /* visibility: inherit; */
 }
