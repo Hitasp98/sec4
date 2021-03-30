@@ -38,7 +38,7 @@ router.post("/addUser", (req, res) => {
       if (err) {
         console.log("error ", err);
       } else {
-        console.log("insert1");
+        console.log("insert");
       }
     }
   );
@@ -50,7 +50,7 @@ router.post("/EditUser", (req, res) => {
       if (err) {
         console.log("error ", err);
       } else {
-        console.log("insert1");
+        console.log("Update");
       }
     }
   });
@@ -62,7 +62,7 @@ router.post("/EditUser", (req, res) => {
         if (err) {
           console.log("error ", err);
         } else {
-          console.log("insert1");
+          console.log("Delete");
         }
       }
     });

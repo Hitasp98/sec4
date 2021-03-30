@@ -94,6 +94,8 @@ const vcode = document.getElementById("codeone").value;
             }),
             dataType: "json",
         });
+        location.reload();
+
     }    
 });
 btnUpdate.addEventListener("click",()=>{
