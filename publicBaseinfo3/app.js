@@ -20,7 +20,6 @@ hbs.registerPartials(partialsPath)
 
 
 
-
 app.use(bodyParser.json())
 app.use(express.static("./html/"))
 //select tblcharityaccounts
@@ -35,20 +34,23 @@ router.post("/tblcharityaccounts", (req, res) => {
         }
     });
 });
+
 router.post("/addUser", (req, res) => {
-    db.query('INSERT INTO `tblcharityaccounts` (`CharityAccountId`, `BankId`, `BranchName`, `OwnerName`, `CardNumber`, `AccountNumber`, `AccountName`) VALUES"' + '"("'
-        + req.body.numberAccount +
+    db.query('INSERT INTO `tblcharityaccounts` (`CharityAccountId`, `BankId`, `BranchName`, `OwnerName`, `CardNumber`, `AccountNumber`, `AccountName`) VALUES("' +
+        req.body.charityAccountId +
+        '","' +
+        +req.body.bankId +
         '","' +
         req.body.nameBank +
+        '","' +
+        req.body.nameAccount +
+        '","' +
+        req.body.numberCart +
         '","' +
         req.body.numberAccount +
         '","' +
         req.body.nameNumberAccount +
-        '","' +
-        req.body.numberCart +
-        '","' +
-        req.body.numberAccount
-        + '")',
+        '")',
         (err, rows) => {
             if (err) {
                 console.log("error ", err);
@@ -60,7 +62,21 @@ router.post("/addUser", (req, res) => {
 });
 router.post("/EditUser", (req, res) => {
     // "UPDATE users SET name='"+req.body.nameone+"' where id='"+req.body.codeone+"'"
-    db.query("UPDATE `tblcommonbasetype` SET `BaseTypeTitle`='" + req.body.nameone + "' where `CommonBaseTypeId`=" + req.body.codeone + ""),
+    db.query("UPDATE `tblcharityaccounts` SET `CharityAccountId`=" +
+        req.body.charityAccountId +
+        " WHERE 1 `BankId`=" +
+        req.body.bankId +
+        ",`BranchName`=" +
+        req.body.nameBank +
+        ",`OwnerName`=" +
+        req.body.nameAccount +
+        ",`CardNumber`=" +
+        req.body.numberCart +
+        ",`AccountNumber`=" +
+        req.body.numberAccount +
+        ",`AccountName`=" +
+        req.body.nameNumberAccount +
+        ""),
         (err, rows) => {
             if (err) {
                 console.log("error ", err);
@@ -72,7 +88,8 @@ router.post("/EditUser", (req, res) => {
 
 router.post("/DeleteUser", (req, res) => {
     // DELETE FROM `tblcommonbasetype` WHERE `tblcommonbasetype`.`CommonBaseTypeId` = 14"?
-    db.query("DELETE FROM `tblcommonbasetype` WHERE `CommonBaseTypeId`=" + req.body.codeone + ""),
+    db.query("DELETE FROM `tblcharityaccounts` WHERE  `CharityAccountId`=" +
+        req.body.charityAccountId + ""),
         (err, rows) => {
             if (err) {
                 console.log("error ", err);

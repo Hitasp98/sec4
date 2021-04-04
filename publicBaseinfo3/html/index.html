@@ -16,6 +16,7 @@
       <div class="sizeTable">
         <table id="msg_q">
           <tr>
+            <th>شناسه واریز</th>
             <th>شماره حساب</th>
             <th>نام حساب</th>
             <th>شماره کارت</th>
@@ -27,7 +28,7 @@
         <div class="border1">
             <div style="text-align: right;">
           <div class='basebord'>
-            <input type="text" id="nameplace"/>
+            <input type="text" id="bankId"/>
             <label>نام شعبه افتتاح حساب</label>
             <select id="namebank">
               <option>ملت</option>
@@ -55,11 +56,15 @@
         </div>
         </div>
         <div>
-          <button id="delete">حذف</button>
+        
           <button id="edit">ویرایش</button>
           <button id="new">جدید</button>
         </div>
-        <h1 id="number"></h1>
+      <div style="margin-top: 50px;">
+        <input type="number" id="chnumber"/>
+        <label>شناسه واریز</label>
+        <button id="delete">حذف</button>
+      </div>
       </div>
     </div>
     <script src="js/index.js"></script>
