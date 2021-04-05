@@ -1,10 +1,8 @@
 var mysql = require('mysql');
-
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "admin",
-    password: "admin",
-    database: "Model_Data"
-  
-  });
-module.exports=con;
+var db = mysql.createConnection({
+  host: "localhost",
+  user: "admin" /* replace these with real values. */,
+  password: "admin" /* replace these with real values. */,
+  database: "model_data" /* replace these with real values. */,
+});
+module.exports=db;
