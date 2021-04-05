@@ -1,7 +1,7 @@
 const btnnew = document.querySelector('#new')
 const btnEdit = document.querySelector('#edit')
 const btnDelete = document.querySelector('#delete')
-const btnSearch=document.querySelector('#btnSearch')
+const btnSearch = document.querySelector('#btnSearch')
 
 //connect selector
 function getmsgs1() {
@@ -19,21 +19,16 @@ function getmsgs1() {
                 $("#msg_q").append(
                     "<tr>" +
                     "<td>" +
-                    row.CharityAccountId+
+                    row.IdNumber +
                     " </td>" +
                     "<td>" +
-                    row. CardNumber+
+                    row.sex +
                     " </td>" + "<td>" +
-                    row.OwnerName +
+                    row.Family+
                     " </td>" + "<td>" +
-                    row.AccountNumber+
+                    row.NAME +
                     " </td>" +
-                    "<td>" +
-                    row.AccountName+
-                    " </td>" +
-                    "<td>" +
-                    row.BranchName +
-                    " </td>" +
+
                     "</tr>"
                 );
             }
@@ -44,21 +39,33 @@ getmsgs1();
 
 
 btnnew.addEventListener('click', () => {
-    const bankId = document.getElementById("bankId").value;
-    const nameBank = document.getElementById("namebank").value;
-    const nameNumberAccount = document.getElementById("nameNumberAccunt").value;
-    const numberCart = document.getElementById("numberCart").value;
-    const nameAccount=document.getElementById("nameAccount").value;
-    const numberAccount = document.getElementById("numberAccount").value;
-    var charityAccountId = '610422'
+    const Name = document.getElementById("Name").value;
+    const Family = document.getElementById("Family").value;
+    const PersonType = document.getElementById("PersonType").value;
+    const NationalCode = document.getElementById("NationalCode").value;
+    const BirthDate = document.getElementById("BirthDate").value;
+    const BirthPlace = document.getElementById("BirthPlace").value;
+    const PersonPhoto = document.getElementById("PersonPhoto").value;
+    // const SecretCode = document.getElementById("SecretCode").value;
+    const IdNumber = document.getElementById("IdNumber").value;
+    const SecretCode ="admin"
+    var male=document.getElementById('male').checked;
+    var female=document.getElementById('female').checked;
+var checked;
+if(male==true){
+    checked=1
+}else {
+    checked=0
+}
+    var PersonId = '610422'
     for (let i = 0; i < 6; i++) {
-      var  rnadom = Math.floor(Math.random() * 0) + 9;
-    
-        charityAccountId += rnadom.toString()
+        var rnadom = Math.floor(Math.random() * 0) + 9;
+
+        PersonId += rnadom.toString()
     }
-    charityAccountId += '5298'
+    PersonId += '5298'
     var rand = Math.floor(Math.random() * 10) + 100
-    if (bankId == "" || nameBank == "" || nameNumberAccount == ""||nameAccount=="" || numberCart == "" || numberAccount == "") {
+    if (Name == "" || Family == "" && PersonType == "" && NationalCode == "" && BirthDate == "" && BirthPlace == ""&&  SecretCode == ""||PersonPhoto=="") {
         alert("epmty")
     } else {
         $.ajax({
@@ -66,13 +73,16 @@ btnnew.addEventListener('click', () => {
             url: "/addUser",
             contentType: "application/json",
             data: JSON.stringify({
-                charityAccountId: charityAccountId,
-                bankId: bankId,
-                nameBank: nameBank,
-                nameAccount: nameAccount,
-                nameNumberAccount: nameNumberAccount,
-                numberCart: numberCart,
-                numberAccount: numberAccount
+                PersonId: PersonId,
+                Name: Name,
+                Family: Family,
+                PersonType: PersonType,
+                NationalCode: NationalCode,
+                BirthDate: BirthDate,
+                BirthPlace: BirthPlace,
+                SecretCode:SecretCode,
+                checked:checked,
+                PersonPhoto:PersonPhoto
             }),
             dataType: "json",
         });
@@ -80,7 +90,7 @@ btnnew.addEventListener('click', () => {
 
     }
 })
-btnEdit .addEventListener('click',()=>{
+btnEdit.addEventListener('click', () => {
     const namePlace = document.getElementById("bankId").value;
     const nameBank = document.getElementById("namebank").value;
     const nameNumberAccount = document.getElementById("nameNumberAccunt").value;
@@ -109,10 +119,10 @@ btnEdit .addEventListener('click',()=>{
 
     }
 })
-btnDelete.addEventListener('click',()=>{
+btnDelete.addEventListener('click', () => {
     const chNumber = document.getElementById("chnumber").value;
-   
-    if (chNumber == "" ) {
+
+    if (chNumber == "") {
 
         alert("epmty")
     } else {
@@ -130,11 +140,11 @@ btnDelete.addEventListener('click',()=>{
 
     }
 })
-btnSearch.addEventListener('click',()=>{
+btnSearch.addEventListener('click', () => {
     const inputSearch = document.getElementById("inputSearch").value;
     console.log(inputSearch)
 
-    if (inputSearch == "" ) {
+    if (inputSearch == "") {
 
         alert("epmty")
     } else {
@@ -149,7 +159,8 @@ btnSearch.addEventListener('click',()=>{
             dataType: "json",
             success: function (data) {
                 for (row of data) {
-                    $('#setSearch').append(row.AccountName)
+                    // $('#setSearch').value(row.NAME)
+                    document.getElementById('msg_q').textContent=row.NAME
                 }
             }
         });

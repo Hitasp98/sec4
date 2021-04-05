@@ -20,14 +20,14 @@ function getmsgs1() {
                     row.CharityAccountId+
                     " </td>" +
                     "<td>" +
-                    row. CardNumber+
+                    row.OwnerName+
                     " </td>" + "<td>" +
-                    row.OwnerName +
+                    row.CardNumber +
                     " </td>" + "<td>" +
-                    row.AccountNumber+
+                    row.AccountName+
                     " </td>" +
                     "<td>" +
-                    row.AccountName+
+                    row.AccountNumber+
                     " </td>" +
                     "<td>" +
                     row.BranchName +
@@ -47,13 +47,14 @@ btnnew.addEventListener('click', () => {
     const numberCart = document.getElementById("numberCart").value;
     const nameAccount=document.getElementById("nameAccount").value;
     const numberAccount = document.getElementById("numberAccount").value;
-    var charityAccountId = '610422'
+    var charityAccountId = '610'
     for (let i = 0; i < 6; i++) {
-      var  rnadom = Math.floor(Math.random() * 0) + 9;
+      var  rnadom = Math.floor(Math.random() * 9) ;
     
         charityAccountId += rnadom.toString()
     }
-    charityAccountId += '5298'
+    
+    charityAccountID=parseInt(charityAccountId)
     var rand = Math.floor(Math.random() * 10) + 100
     if (bankId == "" || nameBank == "" || nameNumberAccount == ""||nameAccount=="" || numberCart == "" || numberAccount == "") {
         alert("epmty")
@@ -63,13 +64,14 @@ btnnew.addEventListener('click', () => {
             url: "/addUser",
             contentType: "application/json",
             data: JSON.stringify({
-                charityAccountId: charityAccountId,
+                charityAccountId: charityAccountID,
                 bankId: bankId,
                 nameBank: nameBank,
                 nameAccount: nameAccount,
                 nameNumberAccount: nameNumberAccount,
+                numberAccount: numberAccount,
                 numberCart: numberCart,
-                numberAccount: numberAccount
+               
             }),
             dataType: "json",
         });

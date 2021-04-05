@@ -34,7 +34,7 @@ router.post("/tblcharityaccounts", (req, res) => {
         }
     });
 });
-
+//add user
 router.post("/addUser", (req, res) => {
     db.query('INSERT INTO `tblcharityaccounts` (`CharityAccountId`, `BankId`, `BranchName`, `OwnerName`, `CardNumber`, `AccountNumber`, `AccountName`) VALUES("' +
         req.body.charityAccountId +
@@ -60,13 +60,12 @@ router.post("/addUser", (req, res) => {
         }
     );
 });
+//edit
 router.post("/EditUser", (req, res) => {
     // "UPDATE users SET name='"+req.body.nameone+"' where id='"+req.body.codeone+"'"
-    db.query("UPDATE `tblcharityaccounts` SET `CharityAccountId`=" +
-        req.body.charityAccountId +
-        " WHERE 1 `BankId`=" +
-        req.body.bankId +
-        ",`BranchName`=" +
+    db.query("UPDATE `tblcharityaccounts` SET `BankId`=" +
+    req.body.bankId  +
+        " WHERE 1 `BranchName`=" +
         req.body.nameBank +
         ",`OwnerName`=" +
         req.body.nameAccount +
@@ -85,7 +84,7 @@ router.post("/EditUser", (req, res) => {
             }
         }
 });
-
+//delete
 router.post("/DeleteUser", (req, res) => {
     // DELETE FROM `tblcommonbasetype` WHERE `tblcommonbasetype`.`CommonBaseTypeId` = 14"?
     db.query("DELETE FROM `tblcharityaccounts` WHERE  `CharityAccountId`=" +
