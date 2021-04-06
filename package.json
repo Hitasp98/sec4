@@ -10,8 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "hbs": "^4.1.1",
+    "http": "0.0.1-security",
+    "http-error-pages": "^3.1.0",
+    "http-status-codes": "^2.1.4",
     "json-parser": "^3.1.2",
     "json-sql": "^0.5.0",
     "mysql": "^2.18.1"
