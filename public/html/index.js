@@ -22,7 +22,7 @@ const btnDeTow = document.querySelector("#btnDeleteTwo")
 function getmsgs1() {
     $.ajax({
         type: "POST",
-        url: "/selecttblcommonbasetype",
+        url: "/product/selecttblcommonbasetype",
         contentType: "application/json",
         data: JSON.stringify({
             doc_id_msgs: $("#doct_id").val(),
@@ -50,7 +50,7 @@ getmsgs1();
 function tblcommonbasedata() {
     $.ajax({
         type: "POST",
-        url: "/selecttblcommonbasedata",
+        url: "/product/selecttblcommonbasedata",
         contentType: "application/json",
         data: JSON.stringify({
             doc_id_msgs: $("#doct_id").val(),
@@ -150,7 +150,7 @@ btnInsert.addEventListener("click", () => {
     } else {
         $.ajax({
             type: "POST",
-            url: "/addUser",
+            url: "/product/addUserBasetype",
             contentType: "application/json",
             data: JSON.stringify({
                 nameone: vname,
@@ -172,7 +172,7 @@ btnUpdate.addEventListener("click", () => {
     } else {
         $.ajax({
             type: "POST",
-            url: "/EditUser",
+            url: "/product/UpdateBasetype",
             contentType: "application/json",
             data: JSON.stringify({
                 nameone: vname,
@@ -194,7 +194,7 @@ btnDel.addEventListener("click", () => {
     } else {
         $.ajax({
             type: "POST",
-            url: "/DeleteUser",
+            url: "/product/DeleteBasetype",
             contentType: "application/json",
             data: JSON.stringify({
                 codeone: vcode,
@@ -230,7 +230,7 @@ btnInsertTwo.addEventListener("click", () => {
     } else {
         $.ajax({
             type: "POST",
-            url: "/addUserTwo",
+            url: "/product/addUserBasedata",
             contentType: "application/json",
             data: JSON.stringify({
                 nameone: vname,
@@ -254,7 +254,7 @@ btnUpdateTwo.addEventListener("click", () => {
     } else {
         $.ajax({
             type: "POST",
-            url: "/EditUserTwo",
+            url: "/product/UpdateBasedata",
             contentType: "application/json",
             data: JSON.stringify({
                 nameone: vname,
@@ -274,7 +274,7 @@ btnDeTow.addEventListener("click", () => {
     } else {
         $.ajax({
             type: "POST",
-            url: "/DeleteUserTwo",
+            url: "/product/DeleteBasedata",
             contentType: "application/json",
             data: JSON.stringify({
                 codeone: vcode,
