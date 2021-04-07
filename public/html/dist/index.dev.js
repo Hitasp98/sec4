@@ -1,44 +1,44 @@
 "use strict";
 
-//button table one 
-var btnNew = document.querySelector("#new");
-var btnClose = document.querySelector("#close");
-var btnEdit = document.querySelector("#edit");
-var btnClose1 = document.querySelector("#close1");
-var btnDelete = document.querySelector("#delet");
-var btnClose2 = document.querySelector("#close2");
-var btnInsert = document.querySelector("#btnSave");
-var btnUpdate = document.querySelector("#btnupdate");
-var btnDel = document.querySelector("#btnDelete"); //button table tow
+//button table one
+var btnNew = document.querySelector('#new');
+var btnClose = document.querySelector('#close');
+var btnEdit = document.querySelector('#edit');
+var btnClose1 = document.querySelector('#close1');
+var btnDelete = document.querySelector('#delet');
+var btnClose2 = document.querySelector('#close2');
+var btnInsert = document.querySelector('#btnSave');
+var btnUpdate = document.querySelector('#btnupdate');
+var btnDel = document.querySelector('#btnDelete'); //button table tow
 
-var btnNewTwo = document.querySelector("#newTwo");
-var btnCloseTwo = document.querySelector("#closeTwo");
-var btnEditTwo1 = document.querySelector("#editTwo");
-var btnCloseTwo1 = document.querySelector("#closeTwo1");
-var btnDeleteTwo1 = document.querySelector("#deleteTwo");
-var btnCloseTwo2 = document.querySelector("#closeTwo2");
-var btnInsertTwo = document.querySelector("#btnSaveTwo");
-var btnUpdateTwo = document.querySelector("#btnUpdateTwo");
-var btnDeTow = document.querySelector("#btnDeleteTwo");
+var btnNewTwo = document.querySelector('#newTwo');
+var btnCloseTwo = document.querySelector('#closeTwo');
+var btnEditTwo1 = document.querySelector('#editTwo');
+var btnCloseTwo1 = document.querySelector('#closeTwo1');
+var btnDeleteTwo1 = document.querySelector('#deleteTwo');
+var btnCloseTwo2 = document.querySelector('#closeTwo2');
+var btnInsertTwo = document.querySelector('#btnSaveTwo');
+var btnUpdateTwo = document.querySelector('#btnUpdateTwo');
+var btnDeTow = document.querySelector('#btnDeleteTwo');
 var btnSearch = document.querySelector('#btnSearch'); //!!:show data base on table
 
-function getmsgs1() {
+function ws_loadBaseType() {
   var vname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var vid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var vcode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
 
   if (vname === 1 && vid === 1 && vcode === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/selectTbBasetypeone",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/selectTbBasetypeone',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
+        doc_id_msgs: $('#doct_id').val(),
         CommonBaseTypeId: vname,
         BaseTypeTitle: vid,
         BaseTypeCode: vcode
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
@@ -47,7 +47,7 @@ function getmsgs1() {
         try {
           for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             row = _step.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseTypeTitle + "</td>" + "<td>" + row.CommonBaseTypeId + " </td>" + "<tr>");
+            $('#msg_q').append('<tr>' + '<td>' + row.BaseTypeTitle + '</td>' + '<td>' + row.CommonBaseTypeId + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError = true;
@@ -67,14 +67,14 @@ function getmsgs1() {
     });
   } else if (vname !== 1 && vId === 1 && vcode === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/searchTbBaseTypeTitle",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/searchTbBaseTypeTitle',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
+        doc_id_msgs: $('#doct_id').val(),
         BaseTypeTitle: vname
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
@@ -83,7 +83,7 @@ function getmsgs1() {
         try {
           for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             row = _step2.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseTypeTitle + "</td>" + "<td>" + row.CommonBaseTypeId + " </td>" + "<tr>");
+            $('#msg_q').append('<tr>' + '<td>' + row.BaseTypeTitle + '</td>' + '<td>' + row.CommonBaseTypeId + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError2 = true;
@@ -103,14 +103,14 @@ function getmsgs1() {
     });
   } else if (vname === 1 && vId !== 1 && vcode === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/searchBasetype",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/searchBasetype',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
+        doc_id_msgs: $('#doct_id').val(),
         CommonBaseTypeId: vid
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion3 = true;
         var _didIteratorError3 = false;
@@ -119,7 +119,7 @@ function getmsgs1() {
         try {
           for (var _iterator3 = data[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
             row = _step3.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseTypeTitle + "</td>" + "<td>" + row.CommonBaseTypeId + " </td>" + "<tr>");
+            $('#msg_q').append('<tr>' + '<td>' + row.BaseTypeTitle + '</td>' + '<td>' + row.CommonBaseTypeId + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError3 = true;
@@ -139,16 +139,16 @@ function getmsgs1() {
     });
   } else {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/selecttblcommonbasetype",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/selecttblcommonbasetype',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
+        doc_id_msgs: $('#doct_id').val(),
         CommonBaseTypeId: vid,
         BaseTypeTitle: vname,
         BaseTypeCode: vcode
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion4 = true;
         var _didIteratorError4 = false;
@@ -157,7 +157,7 @@ function getmsgs1() {
         try {
           for (var _iterator4 = data[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
             row = _step4.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseTypeTitle + "</td>" + "<td>" + row.CommonBaseTypeId + " </td>" + "<tr>");
+            $('#msg_q').append('<tr>' + '<td>' + row.BaseTypeTitle + '</td>' + '<td>' + row.CommonBaseTypeId + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError4 = true;
@@ -178,9 +178,9 @@ function getmsgs1() {
   }
 }
 
-getmsgs1(); //ajax db select
+ws_loadBaseType(); //ajax db select
 
-function tblcommonbasedata() {
+function ws_loadCharityAccounts() {
   var CommonBaseDataId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var BaseCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var BaseValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
@@ -188,13 +188,13 @@ function tblcommonbasedata() {
 
   if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/selecttblcommonbasedata",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/selecttblcommonbasedata',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val()
+        doc_id_msgs: $('#doct_id').val()
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion5 = true;
         var _didIteratorError5 = false;
@@ -203,7 +203,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator5 = data[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
             row = _step5.value;
-            $("#dbdataTwo").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
+            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseCode + '</td>' + '<td>' + row.BaseValue + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError5 = true;
@@ -223,15 +223,15 @@ function tblcommonbasedata() {
     });
   } else if (CommonBaseDataId !== 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/selectTbSearch",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/selectTbSearch',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
-        filter: "CommonBaseDataId",
+        doc_id_msgs: $('#doct_id').val(),
+        filter: 'CommonBaseDataId',
         value: CommonBaseDataId
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion6 = true;
         var _didIteratorError6 = false;
@@ -240,7 +240,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator6 = data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
             row = _step6.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.BaseCode + " </td>" + "<tr>");
+            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseValue + '</td>' + '<td>' + row.BaseCode + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError6 = true;
@@ -260,15 +260,15 @@ function tblcommonbasedata() {
     });
   } else if (CommonBaseDataId === 1 && BaseCode !== 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/selectTbSearch",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/selectTbSearch',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
-        filter: "BaseCode",
+        doc_id_msgs: $('#doct_id').val(),
+        filter: 'BaseCode',
         value: BaseCode
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion7 = true;
         var _didIteratorError7 = false;
@@ -277,7 +277,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator7 = data[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
             row = _step7.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.CommonBaseDataId + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
+            $('#dbdataTwo').append('<tr>' + '<td>' + row.CommonBaseDataId + '</td>' + '<td>' + row.BaseValue + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError7 = true;
@@ -297,15 +297,15 @@ function tblcommonbasedata() {
     });
   } else if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue !== 1 && CommonBaseTypeID === 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/selectTbSearch",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/selectTbSearch',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
-        filter: "BaseValue",
+        doc_id_msgs: $('#doct_id').val(),
+        filter: 'BaseValue',
         value: BaseValue
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion8 = true;
         var _didIteratorError8 = false;
@@ -314,7 +314,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator8 = data[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
             row = _step8.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
+            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseCode + '</td>' + '<td>' + row.CommonBaseDataId + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError8 = true;
@@ -334,15 +334,15 @@ function tblcommonbasedata() {
     });
   } else if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID !== 1) {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/selectTbSearch",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/selectTbSearch',
+      contentType: 'application/json',
       data: JSON.stringify({
-        doc_id_msgs: $("#doct_id").val(),
-        filter: "CommonBaseTypeID",
+        doc_id_msgs: $('#doct_id').val(),
+        filter: 'CommonBaseTypeID',
         value: CommonBaseTypeID
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion9 = true;
         var _didIteratorError9 = false;
@@ -351,7 +351,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator9 = data[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
             row = _step9.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
+            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseValue + '</td>' + '<td>' + row.CommonBaseDataId + ' </td>' + '<tr>');
           }
         } catch (err) {
           _didIteratorError9 = true;
@@ -372,77 +372,76 @@ function tblcommonbasedata() {
   }
 }
 
-tblcommonbasedata(1, 46); //!show insert input
+ws_loadCharityAccounts(); //!show insert input
 
-btnNew.addEventListener("click", function () {
-  document.getElementById("vsave").style.visibility = "inherit";
-  document.getElementById("vsave1").style.visibility = "hidden";
-  document.getElementById("vsave2").style.visibility = "hidden";
+btnNew.addEventListener('click', function () {
+  document.getElementById('vsave').style.visibility = 'inherit';
+  document.getElementById('vsave1').style.visibility = 'hidden';
+  document.getElementById('vsave2').style.visibility = 'hidden';
 });
-btnNewTwo.addEventListener("click", function () {
-  document.getElementById("vsaveTwo").style.visibility = "inherit";
-  document.getElementById("vsaveTwo1").style.visibility = "hidden";
-  document.getElementById("vsaveTwo2").style.visibility = "hidden";
+btnNewTwo.addEventListener('click', function () {
+  document.getElementById('vsaveTwo').style.visibility = 'inherit';
+  document.getElementById('vsaveTwo1').style.visibility = 'hidden';
+  document.getElementById('vsaveTwo2').style.visibility = 'hidden';
 }); //!hidden insert input
 
-btnClose.addEventListener("click", function () {
-  document.getElementById("vsave").style.visibility = "hidden";
+btnClose.addEventListener('click', function () {
+  document.getElementById('vsave').style.visibility = 'hidden';
 });
-btnCloseTwo.addEventListener("click", function () {
-  document.getElementById("vsaveTwo").style.visibility = "hidden";
+btnCloseTwo.addEventListener('click', function () {
+  document.getElementById('vsaveTwo').style.visibility = 'hidden';
 }); //!show edit input
 
-btnEdit.addEventListener("click", function () {
-  document.getElementById("vsave1").style.visibility = "inherit";
-  document.getElementById("vsave").style.visibility = "hidden";
-  document.getElementById("vsave2").style.visibility = "hidden";
+btnEdit.addEventListener('click', function () {
+  document.getElementById('vsave1').style.visibility = 'inherit';
+  document.getElementById('vsave').style.visibility = 'hidden';
+  document.getElementById('vsave2').style.visibility = 'hidden';
 });
-btnEditTwo1.addEventListener("click", function () {
-  document.getElementById("vsaveTwo1").style.visibility = "inherit";
-  document.getElementById("vsaveTwo").style.visibility = "hidden";
-  document.getElementById("vsaveTwo2").style.visibility = "hidden";
+btnEditTwo1.addEventListener('click', function () {
+  document.getElementById('vsaveTwo1').style.visibility = 'inherit';
+  document.getElementById('vsaveTwo').style.visibility = 'hidden';
+  document.getElementById('vsaveTwo2').style.visibility = 'hidden';
 }); //!hidden edit input
 
-btnClose1.addEventListener("click", function () {
-  document.getElementById("vsave1").style.visibility = "hidden";
+btnClose1.addEventListener('click', function () {
+  document.getElementById('vsave1').style.visibility = 'hidden';
 });
-btnCloseTwo1.addEventListener("click", function () {
-  document.getElementById("vsaveTwo1").style.visibility = "hidden";
+btnCloseTwo1.addEventListener('click', function () {
+  document.getElementById('vsaveTwo1').style.visibility = 'hidden';
 }); //!show delete input
 
-btnDelete.addEventListener("click", function () {
-  document.getElementById("vsave2").style.visibility = "inherit";
-  document.getElementById("vsave1").style.visibility = "hidden";
-  document.getElementById("vsave").style.visibility = "hidden";
+btnDelete.addEventListener('click', function () {
+  document.getElementById('vsave2').style.visibility = 'inherit';
+  document.getElementById('vsave1').style.visibility = 'hidden';
+  document.getElementById('vsave').style.visibility = 'hidden';
 });
-btnDeleteTwo1.addEventListener("click", function () {
-  document.getElementById("vsaveTwo2").style.visibility = "inherit";
-  document.getElementById("vsaveTwo1").style.visibility = "hidden";
-  document.getElementById("vsaveTwo").style.visibility = "hidden";
+btnDeleteTwo1.addEventListener('click', function () {
+  document.getElementById('vsaveTwo2').style.visibility = 'inherit';
+  document.getElementById('vsaveTwo1').style.visibility = 'hidden';
+  document.getElementById('vsaveTwo').style.visibility = 'hidden';
 }); //!hidden delete input
 
-btnCloseTwo2.addEventListener("click", function () {
-  document.getElementById("vsaveTwo2").style.visibility = "hidden";
-}); //!send value inset on server 
+btnCloseTwo2.addEventListener('click', function () {
+  document.getElementById('vsaveTwo2').style.visibility = 'hidden';
+}); //!send value inset on server
 
-btnInsert.addEventListener("click", function () {
-  var vname = document.getElementById("nameone").value;
-  var vcode = document.getElementById("codeone").value;
+function ws_CreateBaseType(BaseTypeCode, BaseTypeTitle) {
   var s = [];
 
-  if (vname == "" || vcode == "") {
-    alert("epmty");
+  if (BaseTypeTitle == '' || BaseTypeCode == '') {
+    alert('epmty');
   } else {
+    //Todo: give data for chack 
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/searchBasetype",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/searchBasetype',
+      contentType: 'application/json',
       data: JSON.stringify({
-        BaseTypeTitle: vname,
-        CommonBaseTypeId: vcode,
-        doc_id_msgs: $("#doct_id").val()
+        //   BaseTypeTitle: BaseTypeTitle,
+        BaseTypeCode: BaseTypeCode,
+        doc_id_msgs: $('#doct_id').val()
       }),
-      dataType: "json",
+      dataType: 'json',
       success: function success(data) {
         var _iteratorNormalCompletion10 = true;
         var _didIteratorError10 = false;
@@ -471,13 +470,13 @@ btnInsert.addEventListener("click", function () {
         }
 
         $.ajax({
-          type: "POST",
-          url: "/productcommonbasetype/searchTbBaseTypeTitle",
-          contentType: "application/json",
+          type: 'POST',
+          url: '/productcommonbasetype/searchTbBaseTypeTitle',
+          contentType: 'application/json',
           data: JSON.stringify({
-            BaseTypeTitle: vname
+            BaseTypeTitle: BaseTypeTitle
           }),
-          dataType: "json",
+          dataType: 'json',
           success: function success(data) {
             var _iteratorNormalCompletion11 = true;
             var _didIteratorError11 = false;
@@ -507,113 +506,274 @@ btnInsert.addEventListener("click", function () {
         });
 
         if (s.length > 0) {
-          alert("is here");
+          alert('is here');
         } else {
-          var BaseTypeCode = Math.floor(Math.random() * 999) + 100;
+          var _vcode = Math.floor(Math.random() * 999) + 100;
+
           $.ajax({
-            type: "POST",
-            url: "/productcommonbasetype/addUserBasetype",
-            contentType: "application/json",
+            type: 'POST',
+            url: '/productcommonbasetype/addUserBasetype',
+            contentType: 'application/json',
             data: JSON.stringify({
-              nameone: vname,
-              codeone: vcode,
+              nameone: BaseTypeTitle,
+              codeone: _vcode,
               BaseTypeCode: BaseTypeCode
             }),
-            dataType: "json"
+            dataType: 'json'
           });
         }
       }
     });
   }
-});
-btnUpdate.addEventListener("click", function () {
-  var vname = document.getElementById("nameone1").value;
-  var vcode = document.getElementById("codeone1").value;
+}
 
-  if (vname == "" || vcode == "") {
-    alert("epmty");
+function ws_UpdateBaseType(BaseTypeCode, BaseTypeTitle, CommonBaseTypeId) {
+  if (BaseTypeTitle == '' || BaseTypeCode == '') {
+    alert('epmty');
   } else {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/UpdateBasetype",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/UpdateBasetype',
+      contentType: 'application/json',
       data: JSON.stringify({
-        nameone: vname,
-        codeone: vcode
+        BaseTypeTitle: BaseTypeTitle,
+        BaseTypeCode: BaseTypeCode,
+        CommonBaseTypeId: CommonBaseTypeId
       }),
-      dataType: "json"
+      dataType: 'json'
     });
     location.reload();
   }
-});
-btnDel.addEventListener("click", function () {
-  var vcode = document.getElementById("codeone2").value;
+}
 
-  if (vcode == "") {
-    alert("epmty");
+function ws_DeleteBaseType(CommonBaseTypeId) {
+  if (vcode == '') {
+    alert('epmty');
   } else {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasetype/DeleteBasetype",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasetype/DeleteBasetype',
+      contentType: 'application/json',
       data: JSON.stringify({
-        codeone: vcode
+        CommonBaseTypeId: CommonBaseTypeId
       }),
-      dataType: "json"
+      dataType: 'json'
     });
     location.reload();
   }
-}); // btnSearch.addEventListener('click', () => {
-//     const CommonBaseTypeId = document.getElementById("inputSearch").value;
-//     console.log(CommonBaseTypeId)
-//     if (CommonBaseTypeId == "") {
-//         $.ajax({
-//             type: "POST",
-//             url: "/productcommonbasetype/selecttblcommonbasetype",
-//             contentType: "application/json",
-//             data: JSON.stringify({
-//                 doc_id_msgs: $("#doct_id").val(),
-//             }),
-//             dataType: "json",
-//             success: function (data) {
-//                 for (row of data) {
-//                     $("#msg_q").append(
-//                         "<tr>" +
-//                         "<td>" +
-//                         row.BaseTypeTitle +
-//                         "</td>" +
-//                         "<td>" +
-//                         row.CommonBaseTypeId +
-//                         " </td>" +
-//                         "<tr>"
-//                     );
-//                 }
-//             },
-//         });
-//     } else {
-//         $.ajax({
-//             type: "POST",
-//             url: "/productcommonbasetype/searchBasetype",
-//             contentType: "application/json",
-//             data: JSON.stringify({
-//                 CommonBaseTypeId: CommonBaseTypeId,
-//                 doc_id_msgs: $("#doct_id").val(),
-//             }),
-//             dataType: "json",
-//             success: function (data) {
-//                 for (row of data) {
-//                     document.getElementById('msg_q').textContent=row.BaseTypeTitle
-//                 }
-//             }
-//         });
-//         // location.reload();
-//     }
-// })
-//table two
+}
 
-btnInsertTwo.addEventListener("click", function () {
-  var vname = document.getElementById("nameoneTwo").value;
-  var vcode = document.getElementById("codeoneTwo").value;
+btnInsert.addEventListener('click', function () {
+  var vname = document.getElementById('nameone').value;
+  var vcode = document.getElementById('codeone').value;
+  ws_CreateBaseType(vcode, vname);
+});
+btnUpdate.addEventListener('click', function () {
+  var vname = document.getElementById('nameone1').value;
+  var vcode = document.getElementById('codeone1').value;
+  var code;
+  var sumBaseTypeTitle = []; //TODO:Give a BaseTypeCode
+
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasetype/searchTbBasetype',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      doc_id_msgs: $('#doct_id').val(),
+      BaseTypeCode: vcode
+    }),
+    dataType: 'json',
+    success: function success(data) {
+      var _iteratorNormalCompletion12 = true;
+      var _didIteratorError12 = false;
+      var _iteratorError12 = undefined;
+
+      try {
+        for (var _iterator12 = data[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+          row = _step12.value;
+          code = row.CommonBaseTypeId;
+        }
+      } catch (err) {
+        _didIteratorError12 = true;
+        _iteratorError12 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion12 && _iterator12["return"] != null) {
+            _iterator12["return"]();
+          }
+        } finally {
+          if (_didIteratorError12) {
+            throw _iteratorError12;
+          }
+        }
+      }
+    }
+  }); //Todo : check data for uqiun
+
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasetype/searchTbBaseTypeTitle',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      doc_id_msgs: $('#doct_id').val(),
+      //Todo : send BaseTypeTitle
+      BaseTypeTitle: vname
+    }),
+    dataType: 'json',
+    success: function success(data) {
+      var _iteratorNormalCompletion13 = true;
+      var _didIteratorError13 = false;
+      var _iteratorError13 = undefined;
+
+      try {
+        for (var _iterator13 = data[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+          row = _step13.value;
+          sumBaseTypeTitle += row;
+        }
+      } catch (err) {
+        _didIteratorError13 = true;
+        _iteratorError13 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion13 && _iterator13["return"] != null) {
+            _iterator13["return"]();
+          }
+        } finally {
+          if (_didIteratorError13) {
+            throw _iteratorError13;
+          }
+        }
+      }
+    }
+  });
+
+  if (sumBaseTypeTitle === 0) {
+    ws_UpdateBaseType(vcode, vname, code);
+  } else {
+    alert('was insert ');
+  }
+});
+btnDel.addEventListener('click', function () {
+  var vcode = document.getElementById('codeone1').value;
+  var code;
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasetype/searchTbBasetype',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      doc_id_msgs: $('#doct_id').val(),
+      BaseTypeCode: vcode
+    }),
+    dataType: 'json',
+    success: function success(data) {
+      var _iteratorNormalCompletion14 = true;
+      var _didIteratorError14 = false;
+      var _iteratorError14 = undefined;
+
+      try {
+        for (var _iterator14 = data[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+          row = _step14.value;
+          code = row.CommonBaseTypeId;
+        }
+      } catch (err) {
+        _didIteratorError14 = true;
+        _iteratorError14 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion14 && _iterator14["return"] != null) {
+            _iterator14["return"]();
+          }
+        } finally {
+          if (_didIteratorError14) {
+            throw _iteratorError14;
+          }
+        }
+      }
+    }
+  });
+  ws_DeleteBaseType(code);
+});
+btnSearch.addEventListener('click', function () {
+  var CommonBaseTypeId = document.getElementById('inputSearch').value;
+  console.log(CommonBaseTypeId);
+
+  if (CommonBaseTypeId == '') {
+    $.ajax({
+      type: 'POST',
+      url: '/productcommonbasetype/selecttblcommonbasetype',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        doc_id_msgs: $('#doct_id').val()
+      }),
+      dataType: 'json',
+      success: function success(data) {
+        var _iteratorNormalCompletion15 = true;
+        var _didIteratorError15 = false;
+        var _iteratorError15 = undefined;
+
+        try {
+          for (var _iterator15 = data[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+            row = _step15.value;
+            $('#msg_q').append('<tr>' + '<td>' + row.BaseTypeTitle + '</td>' + '<td>' + row.CommonBaseTypeId + ' </td>' + '<tr>');
+          }
+        } catch (err) {
+          _didIteratorError15 = true;
+          _iteratorError15 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion15 && _iterator15["return"] != null) {
+              _iterator15["return"]();
+            }
+          } finally {
+            if (_didIteratorError15) {
+              throw _iteratorError15;
+            }
+          }
+        }
+      }
+    });
+  } else {
+    $.ajax({
+      type: 'POST',
+      url: '/productcommonbasetype/searchBasetype',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        CommonBaseTypeId: CommonBaseTypeId,
+        doc_id_msgs: $('#doct_id').val()
+      }),
+      dataType: 'json',
+      success: function success(data) {
+        var _iteratorNormalCompletion16 = true;
+        var _didIteratorError16 = false;
+        var _iteratorError16 = undefined;
+
+        try {
+          for (var _iterator16 = data[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+            row = _step16.value;
+            document.getElementById('msg_q').textContent = row.BaseTypeTitle;
+          }
+        } catch (err) {
+          _didIteratorError16 = true;
+          _iteratorError16 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion16 && _iterator16["return"] != null) {
+              _iterator16["return"]();
+            }
+          } finally {
+            if (_didIteratorError16) {
+              throw _iteratorError16;
+            }
+          }
+        }
+      }
+    }); // location.reload();
+  }
+}); //table two
+
+btnInsertTwo.addEventListener('click', function () {
+  var vname = document.getElementById('nameoneTwo').value;
+  var vcode = document.getElementById('codeoneTwo').value;
   sNumber = vcode.toString();
   randnumber = [];
   insertnumber = [];
@@ -633,58 +793,58 @@ btnInsertTwo.addEventListener("click", function () {
 
   ins += random;
 
-  if (vname == "" || vcode == "") {
-    alert("epmty");
+  if (vname == '' || vcode == '') {
+    alert('epmty');
   } else {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/addUserBasedata",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/addUserBasedata',
+      contentType: 'application/json',
       data: JSON.stringify({
         nameone: vname,
         codeone: vcode,
         idrandom: ins
       }),
-      dataType: "json"
+      dataType: 'json'
     });
     location.reload();
   }
 });
-btnUpdateTwo.addEventListener("click", function () {
+btnUpdateTwo.addEventListener('click', function () {
   console.log('up');
-  var vname = document.getElementById("nameoneTwo1").value;
-  var vcode = document.getElementById("codeoneTwo1").value;
+  var vname = document.getElementById('nameoneTwo1').value;
+  var vcode = document.getElementById('codeoneTwo1').value;
 
-  if (vname == "" || vcode == "") {
-    alert("epmty");
+  if (vname == '' || vcode == '') {
+    alert('epmty');
   } else {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/UpdateBasedata",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/UpdateBasedata',
+      contentType: 'application/json',
       data: JSON.stringify({
         nameone: vname,
         codeone: vcode
       }),
-      dataType: "json"
+      dataType: 'json'
     });
     location.reload();
   }
 });
-btnDeTow.addEventListener("click", function () {
-  var vcode = document.getElementById("codeoneTwo2").value;
+btnDeTow.addEventListener('click', function () {
+  var vcode = document.getElementById('codeoneTwo2').value;
 
-  if (vcode == "") {
-    alert("epmty");
+  if (vcode == '') {
+    alert('epmty');
   } else {
     $.ajax({
-      type: "POST",
-      url: "/productcommonbasedata/DeleteBasedata",
-      contentType: "application/json",
+      type: 'POST',
+      url: '/productcommonbasedata/DeleteBasedata',
+      contentType: 'application/json',
       data: JSON.stringify({
         codeone: vcode
       }),
-      dataType: "json"
+      dataType: 'json'
     });
     location.reload();
   }
