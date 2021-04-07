@@ -22,7 +22,7 @@ const btnSearch = document.querySelector('#btnSearch')
 
 //!!:show data base on table
 function getmsgs1(vname = 1, vid = 1, vcode = 1) {
-    if (vname === 1 && vid === 1 || vcode === 1) {
+    if (vname === 1 && vid === 1 && vcode === 1) {
         $.ajax({
             type: "POST",
             url: "/productcommonbasetype/selectTbBasetypeone",
@@ -50,6 +50,62 @@ function getmsgs1(vname = 1, vid = 1, vcode = 1) {
             },
         });
     }
+    else if(vname !== 1&& vId === 1 && vcode === 1){
+        $.ajax({
+            type: "POST",
+            url: "/productcommonbasetype/searchTbBaseTypeTitle",
+            contentType: "application/json",
+            data: JSON.stringify({
+                doc_id_msgs: $("#doct_id").val(),
+                BaseTypeTitle: vname,
+                
+               
+            }),
+            dataType: "json",
+            success: function (data) {
+                for (row of data) {
+                    $("#msg_q").append(
+                        "<tr>" +
+                        "<td>" +
+                        row.BaseTypeTitle +
+                        "</td>" +
+                        "<td>" +
+                        row.CommonBaseTypeId +
+                        " </td>" +
+                        "<tr>"
+                    );
+                }
+            },
+        });
+    }
+    else if(vname === 1&& vId !== 1 && vcode === 1){
+        $.ajax({
+            type: "POST",
+            url: "/productcommonbasetype/searchBasetype",
+            contentType: "application/json",
+            data: JSON.stringify({
+                doc_id_msgs: $("#doct_id").val(),
+                CommonBaseTypeId: vid,
+                
+               
+            }),
+            dataType: "json",
+            success: function (data) {
+                for (row of data) {
+                    $("#msg_q").append(
+                        "<tr>" +
+                        "<td>" +
+                        row.BaseTypeTitle +
+                        "</td>" +
+                        "<td>" +
+                        row.CommonBaseTypeId +
+                        " </td>" +
+                        "<tr>"
+                    );
+                }
+            },
+        });
+    }
     else {
         $.ajax({
             type: "POST",
@@ -57,8 +113,8 @@ function getmsgs1(vname = 1, vid = 1, vcode = 1) {
             contentType: "application/json",
             data: JSON.stringify({
                 doc_id_msgs: $("#doct_id").val(),
-                CommonBaseTypeId: vname,
-                BaseTypeTitle: vid,
+                CommonBaseTypeId:vid ,
+                BaseTypeTitle: vname,
                 BaseTypeCode: vcode
             }),
             dataType: "json",
