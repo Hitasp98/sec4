@@ -9,7 +9,7 @@ router.post('/selecttblcommonbasetype', Pcommonbasetype.selectTbBasetype);
 router.post('/addUserBasetype', Pcommonbasetype.InsertBasetype);
 router.post('/UpdateBasetype', Pcommonbasetype.UpdateBasetype);
 router.post('/DeleteBasetype',Pcommonbasetype.DeleteBasetype);
-router.post('/searchBasetype',Pcommonbasetype.searchTbBasetype);
+router.post('/searchTbBasetype',Pcommonbasetype.searchTbBasetype);
 router.post('/searchTbBaseTypeTitle',Pcommonbasetype.searchTbBaseTypeTitle)
 router.post('/selectTbBasetypeone',Pcommonbasetype.selectTbBasetypeone)
 // routeer.post('/searchTbBasetypeIn',Pcommonbasetype.searchTbBasetypeIn)

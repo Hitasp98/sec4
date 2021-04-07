@@ -36,7 +36,7 @@ exports.selectTbBasetype = (req, res) => {
 exports.searchTbBasetype = (req, res) => {
 
   db.query(
-    "SELECT * FROM `tblcommonbasetype` WHERE CommonBaseTypeId  LIKE " + req.body.CommonBaseTypeId,
+    "SELECT * FROM `tblcommonbasetype` WHERE BaseTypeCode  LIKE " + req.body.BaseTypeCode,
     (err, rows) => {
       if (err) {
         console.log("error ", err);

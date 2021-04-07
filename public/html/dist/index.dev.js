@@ -1,6 +1,6 @@
 "use strict";
 
-//button table one 
+//button table one
 var btnNew = document.querySelector("#new");
 var btnClose = document.querySelector("#close");
 var btnEdit = document.querySelector("#edit");
@@ -20,9 +20,9 @@ var btnCloseTwo2 = document.querySelector("#closeTwo2");
 var btnInsertTwo = document.querySelector("#btnSaveTwo");
 var btnUpdateTwo = document.querySelector("#btnUpdateTwo");
 var btnDeTow = document.querySelector("#btnDeleteTwo");
-var btnSearch = document.querySelector('#btnSearch'); //!!:show data base on table
+var btnSearch = document.querySelector("#btnSearch"); //!!:show data base on table
 
-function getmsgs1() {
+function ws_loadBaseType() {
   var vname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var vid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var vcode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
@@ -178,9 +178,9 @@ function getmsgs1() {
   }
 }
 
-getmsgs1(); //ajax db select
+ws_loadBaseType(); //ajax db select
 
-function tblcommonbasedata() {
+function ws_loadCharityAccounts() {
   var CommonBaseDataId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var BaseCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var BaseValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
@@ -240,7 +240,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator6 = data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
             row = _step6.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.BaseCode + " </td>" + "<tr>");
+            $("#dbdataTwo").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.BaseCode + " </td>" + "<tr>");
           }
         } catch (err) {
           _didIteratorError6 = true;
@@ -277,7 +277,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator7 = data[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
             row = _step7.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.CommonBaseDataId + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
+            $("#dbdataTwo").append("<tr>" + "<td>" + row.CommonBaseDataId + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
           }
         } catch (err) {
           _didIteratorError7 = true;
@@ -314,7 +314,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator8 = data[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
             row = _step8.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
+            $("#dbdataTwo").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
           }
         } catch (err) {
           _didIteratorError8 = true;
@@ -351,7 +351,7 @@ function tblcommonbasedata() {
         try {
           for (var _iterator9 = data[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
             row = _step9.value;
-            $("#msg_q").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
+            $("#dbdataTwo").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
           }
         } catch (err) {
           _didIteratorError9 = true;
@@ -372,7 +372,7 @@ function tblcommonbasedata() {
   }
 }
 
-tblcommonbasedata(1, 46); //!show insert input
+ws_loadCharityAccounts(); //!show insert input
 
 btnNew.addEventListener("click", function () {
   document.getElementById("vsave").style.visibility = "inherit";
@@ -423,14 +423,12 @@ btnDeleteTwo1.addEventListener("click", function () {
 
 btnCloseTwo2.addEventListener("click", function () {
   document.getElementById("vsaveTwo2").style.visibility = "hidden";
-}); //!send value inset on server 
+}); //!send value inset on server
 
-btnInsert.addEventListener("click", function () {
-  var vname = document.getElementById("nameone").value;
-  var vcode = document.getElementById("codeone").value;
+function ws_CreateBaseType(BaseTypeCode, BaseTypeTitle) {
   var s = [];
 
-  if (vname == "" || vcode == "") {
+  if (BaseTypeTitle == "" || BaseTypeCode == "") {
     alert("epmty");
   } else {
     $.ajax({
@@ -438,8 +436,8 @@ btnInsert.addEventListener("click", function () {
       url: "/productcommonbasetype/searchBasetype",
       contentType: "application/json",
       data: JSON.stringify({
-        BaseTypeTitle: vname,
-        CommonBaseTypeId: vcode,
+        //   BaseTypeTitle: BaseTypeTitle,
+        BaseTypeCode: BaseTypeCode,
         doc_id_msgs: $("#doct_id").val()
       }),
       dataType: "json",
@@ -475,7 +473,7 @@ btnInsert.addEventListener("click", function () {
           url: "/productcommonbasetype/searchTbBaseTypeTitle",
           contentType: "application/json",
           data: JSON.stringify({
-            BaseTypeTitle: vname
+            BaseTypeTitle: BaseTypeTitle
           }),
           dataType: "json",
           success: function success(data) {
@@ -509,14 +507,15 @@ btnInsert.addEventListener("click", function () {
         if (s.length > 0) {
           alert("is here");
         } else {
-          var BaseTypeCode = Math.floor(Math.random() * 999) + 100;
+          var _vcode = Math.floor(Math.random() * 999) + 100;
+
           $.ajax({
             type: "POST",
             url: "/productcommonbasetype/addUserBasetype",
             contentType: "application/json",
             data: JSON.stringify({
-              nameone: vname,
-              codeone: vcode,
+              nameone: BaseTypeTitle,
+              codeone: _vcode,
               BaseTypeCode: BaseTypeCode
             }),
             dataType: "json"
@@ -525,11 +524,15 @@ btnInsert.addEventListener("click", function () {
       }
     });
   }
-});
-btnUpdate.addEventListener("click", function () {
-  var vname = document.getElementById("nameone1").value;
-  var vcode = document.getElementById("codeone1").value;
+}
 
+btnInsert.addEventListener("click", function () {
+  var vname = document.getElementById("nameone").value;
+  var vcode = document.getElementById("codeone").value;
+  ws_CreateBaseType(vcode, vname);
+});
+
+function ws_UpdateBaseType(BaseTypeCode, BaseTypeTitle, CommonBaseTypeId) {
   if (vname == "" || vcode == "") {
     alert("epmty");
   } else {
@@ -545,6 +548,12 @@ btnUpdate.addEventListener("click", function () {
     });
     location.reload();
   }
+}
+
+btnUpdate.addEventListener("click", function () {
+  var vname = document.getElementById("nameone1").value;
+  var vcode = document.getElementById("codeone1").value;
+  ws_UpdateBaseType(vname, vcode);
 });
 btnDel.addEventListener("click", function () {
   var vcode = document.getElementById("codeone2").value;
@@ -563,53 +572,84 @@ btnDel.addEventListener("click", function () {
     });
     location.reload();
   }
-}); // btnSearch.addEventListener('click', () => {
-//     const CommonBaseTypeId = document.getElementById("inputSearch").value;
-//     console.log(CommonBaseTypeId)
-//     if (CommonBaseTypeId == "") {
-//         $.ajax({
-//             type: "POST",
-//             url: "/productcommonbasetype/selecttblcommonbasetype",
-//             contentType: "application/json",
-//             data: JSON.stringify({
-//                 doc_id_msgs: $("#doct_id").val(),
-//             }),
-//             dataType: "json",
-//             success: function (data) {
-//                 for (row of data) {
-//                     $("#msg_q").append(
-//                         "<tr>" +
-//                         "<td>" +
-//                         row.BaseTypeTitle +
-//                         "</td>" +
-//                         "<td>" +
-//                         row.CommonBaseTypeId +
-//                         " </td>" +
-//                         "<tr>"
-//                     );
-//                 }
-//             },
-//         });
-//     } else {
-//         $.ajax({
-//             type: "POST",
-//             url: "/productcommonbasetype/searchBasetype",
-//             contentType: "application/json",
-//             data: JSON.stringify({
-//                 CommonBaseTypeId: CommonBaseTypeId,
-//                 doc_id_msgs: $("#doct_id").val(),
-//             }),
-//             dataType: "json",
-//             success: function (data) {
-//                 for (row of data) {
-//                     document.getElementById('msg_q').textContent=row.BaseTypeTitle
-//                 }
-//             }
-//         });
-//         // location.reload();
-//     }
-// })
-//table two
+});
+btnSearch.addEventListener("click", function () {
+  var CommonBaseTypeId = document.getElementById("inputSearch").value;
+  console.log(CommonBaseTypeId);
+
+  if (CommonBaseTypeId == "") {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasetype/selecttblcommonbasetype",
+      contentType: "application/json",
+      data: JSON.stringify({
+        doc_id_msgs: $("#doct_id").val()
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion12 = true;
+        var _didIteratorError12 = false;
+        var _iteratorError12 = undefined;
+
+        try {
+          for (var _iterator12 = data[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+            row = _step12.value;
+            $("#msg_q").append("<tr>" + "<td>" + row.BaseTypeTitle + "</td>" + "<td>" + row.CommonBaseTypeId + " </td>" + "<tr>");
+          }
+        } catch (err) {
+          _didIteratorError12 = true;
+          _iteratorError12 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion12 && _iterator12["return"] != null) {
+              _iterator12["return"]();
+            }
+          } finally {
+            if (_didIteratorError12) {
+              throw _iteratorError12;
+            }
+          }
+        }
+      }
+    });
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasetype/searchBasetype",
+      contentType: "application/json",
+      data: JSON.stringify({
+        CommonBaseTypeId: CommonBaseTypeId,
+        doc_id_msgs: $("#doct_id").val()
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion13 = true;
+        var _didIteratorError13 = false;
+        var _iteratorError13 = undefined;
+
+        try {
+          for (var _iterator13 = data[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+            row = _step13.value;
+            document.getElementById("msg_q").textContent = row.BaseTypeTitle;
+          }
+        } catch (err) {
+          _didIteratorError13 = true;
+          _iteratorError13 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion13 && _iterator13["return"] != null) {
+              _iterator13["return"]();
+            }
+          } finally {
+            if (_didIteratorError13) {
+              throw _iteratorError13;
+            }
+          }
+        }
+      }
+    }); // location.reload();
+  }
+}); //table two
 
 btnInsertTwo.addEventListener("click", function () {
   var vname = document.getElementById("nameoneTwo").value;
@@ -625,7 +665,7 @@ btnInsertTwo.addEventListener("click", function () {
   var rand = Math.floor(Math.random() * 999) + 100;
   var random = rand.toString();
   console.log(random);
-  var ins = '';
+  var ins = "";
 
   for (var j = 0; j < 3; j++) {
     ins += randnumber[j];
@@ -651,7 +691,7 @@ btnInsertTwo.addEventListener("click", function () {
   }
 });
 btnUpdateTwo.addEventListener("click", function () {
-  console.log('up');
+  console.log("up");
   var vname = document.getElementById("nameoneTwo1").value;
   var vcode = document.getElementById("codeoneTwo1").value;
 
