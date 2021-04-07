@@ -23,9 +23,10 @@ const db = require('../my-database/config')
 app.use(bodyParser.json());
 app.use(express.static("./html/"));
 app.use(express.urlencoded({ extended: true }));
-const productRouter=require('./router/ProductRouter')
-app.use('/product',productRouter)
-
+const commonbasedataRouter=require('./router/commonbasedataRouter')
+app.use('/productcommonbasedata',commonbasedataRouter)
+const commonbasetypeRouter=require('./router/commonbasetypeRouter')
+app.use('/productcommonbasetype',commonbasetypeRouter)
 require('./initDB')();
 
 
