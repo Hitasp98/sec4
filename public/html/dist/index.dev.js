@@ -181,43 +181,198 @@ function getmsgs1() {
 getmsgs1(); //ajax db select
 
 function tblcommonbasedata() {
-  $.ajax({
-    type: "POST",
-    url: "/productcommonbasedata/selecttblcommonbasedata",
-    contentType: "application/json",
-    data: JSON.stringify({
-      doc_id_msgs: $("#doct_id").val()
-    }),
-    dataType: "json",
-    success: function success(data) {
-      var _iteratorNormalCompletion5 = true;
-      var _didIteratorError5 = false;
-      var _iteratorError5 = undefined;
+  var CommonBaseDataId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var BaseCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var BaseValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var CommonBaseTypeID = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
 
-      try {
-        for (var _iterator5 = data[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          row = _step5.value;
-          $("#dbdataTwo").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
-        }
-      } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
-      } finally {
+  if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasedata/selecttblcommonbasedata",
+      contentType: "application/json",
+      data: JSON.stringify({
+        doc_id_msgs: $("#doct_id").val()
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion5 = true;
+        var _didIteratorError5 = false;
+        var _iteratorError5 = undefined;
+
         try {
-          if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
-            _iterator5["return"]();
+          for (var _iterator5 = data[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+            row = _step5.value;
+            $("#dbdataTwo").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
           }
+        } catch (err) {
+          _didIteratorError5 = true;
+          _iteratorError5 = err;
         } finally {
-          if (_didIteratorError5) {
-            throw _iteratorError5;
+          try {
+            if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
+              _iterator5["return"]();
+            }
+          } finally {
+            if (_didIteratorError5) {
+              throw _iteratorError5;
+            }
           }
         }
       }
-    }
-  });
+    });
+  } else if (CommonBaseDataId !== 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasedata/selectTbSearch",
+      contentType: "application/json",
+      data: JSON.stringify({
+        doc_id_msgs: $("#doct_id").val(),
+        filter: "CommonBaseDataId",
+        value: CommonBaseDataId
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion6 = true;
+        var _didIteratorError6 = false;
+        var _iteratorError6 = undefined;
+
+        try {
+          for (var _iterator6 = data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            row = _step6.value;
+            $("#msg_q").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.BaseCode + " </td>" + "<tr>");
+          }
+        } catch (err) {
+          _didIteratorError6 = true;
+          _iteratorError6 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
+              _iterator6["return"]();
+            }
+          } finally {
+            if (_didIteratorError6) {
+              throw _iteratorError6;
+            }
+          }
+        }
+      }
+    });
+  } else if (CommonBaseDataId === 1 && BaseCode !== 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasedata/selectTbSearch",
+      contentType: "application/json",
+      data: JSON.stringify({
+        doc_id_msgs: $("#doct_id").val(),
+        filter: "BaseCode",
+        value: BaseCode
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion7 = true;
+        var _didIteratorError7 = false;
+        var _iteratorError7 = undefined;
+
+        try {
+          for (var _iterator7 = data[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+            row = _step7.value;
+            $("#msg_q").append("<tr>" + "<td>" + row.CommonBaseDataId + "</td>" + "<td>" + row.BaseValue + " </td>" + "<tr>");
+          }
+        } catch (err) {
+          _didIteratorError7 = true;
+          _iteratorError7 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion7 && _iterator7["return"] != null) {
+              _iterator7["return"]();
+            }
+          } finally {
+            if (_didIteratorError7) {
+              throw _iteratorError7;
+            }
+          }
+        }
+      }
+    });
+  } else if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue !== 1 && CommonBaseTypeID === 1) {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasedata/selectTbSearch",
+      contentType: "application/json",
+      data: JSON.stringify({
+        doc_id_msgs: $("#doct_id").val(),
+        filter: "BaseValue",
+        value: BaseValue
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion8 = true;
+        var _didIteratorError8 = false;
+        var _iteratorError8 = undefined;
+
+        try {
+          for (var _iterator8 = data[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+            row = _step8.value;
+            $("#msg_q").append("<tr>" + "<td>" + row.BaseCode + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
+          }
+        } catch (err) {
+          _didIteratorError8 = true;
+          _iteratorError8 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion8 && _iterator8["return"] != null) {
+              _iterator8["return"]();
+            }
+          } finally {
+            if (_didIteratorError8) {
+              throw _iteratorError8;
+            }
+          }
+        }
+      }
+    });
+  } else if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID !== 1) {
+    $.ajax({
+      type: "POST",
+      url: "/productcommonbasedata/selectTbSearch",
+      contentType: "application/json",
+      data: JSON.stringify({
+        doc_id_msgs: $("#doct_id").val(),
+        filter: "CommonBaseTypeID",
+        value: CommonBaseTypeID
+      }),
+      dataType: "json",
+      success: function success(data) {
+        var _iteratorNormalCompletion9 = true;
+        var _didIteratorError9 = false;
+        var _iteratorError9 = undefined;
+
+        try {
+          for (var _iterator9 = data[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+            row = _step9.value;
+            $("#msg_q").append("<tr>" + "<td>" + row.BaseValue + "</td>" + "<td>" + row.CommonBaseDataId + " </td>" + "<tr>");
+          }
+        } catch (err) {
+          _didIteratorError9 = true;
+          _iteratorError9 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion9 && _iterator9["return"] != null) {
+              _iterator9["return"]();
+            }
+          } finally {
+            if (_didIteratorError9) {
+              throw _iteratorError9;
+            }
+          }
+        }
+      }
+    });
+  }
 }
 
-tblcommonbasedata(); //!show insert input
+tblcommonbasedata(1, 46); //!show insert input
 
 btnNew.addEventListener("click", function () {
   document.getElementById("vsave").style.visibility = "inherit";
@@ -289,28 +444,28 @@ btnInsert.addEventListener("click", function () {
       }),
       dataType: "json",
       success: function success(data) {
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
+        var _iteratorNormalCompletion10 = true;
+        var _didIteratorError10 = false;
+        var _iteratorError10 = undefined;
 
         try {
-          for (var _iterator6 = data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            row = _step6.value;
+          for (var _iterator10 = data[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+            row = _step10.value;
             // document.getElementById('msg_q').textContent=row.BaseTypeTitle
             s.push(row);
           } // console.log(s.length)
 
         } catch (err) {
-          _didIteratorError6 = true;
-          _iteratorError6 = err;
+          _didIteratorError10 = true;
+          _iteratorError10 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
-              _iterator6["return"]();
+            if (!_iteratorNormalCompletion10 && _iterator10["return"] != null) {
+              _iterator10["return"]();
             }
           } finally {
-            if (_didIteratorError6) {
-              throw _iteratorError6;
+            if (_didIteratorError10) {
+              throw _iteratorError10;
             }
           }
         }
@@ -324,27 +479,27 @@ btnInsert.addEventListener("click", function () {
           }),
           dataType: "json",
           success: function success(data) {
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
 
             try {
-              for (var _iterator7 = data[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                row = _step7.value;
+              for (var _iterator11 = data[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                row = _step11.value;
                 // document.getElementById('msg_q').textContent=row.BaseTypeTitle
                 s.push(row);
               }
             } catch (err) {
-              _didIteratorError7 = true;
-              _iteratorError7 = err;
+              _didIteratorError11 = true;
+              _iteratorError11 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion7 && _iterator7["return"] != null) {
-                  _iterator7["return"]();
+                if (!_iteratorNormalCompletion11 && _iterator11["return"] != null) {
+                  _iterator11["return"]();
                 }
               } finally {
-                if (_didIteratorError7) {
-                  throw _iteratorError7;
+                if (_didIteratorError11) {
+                  throw _iteratorError11;
                 }
               }
             }

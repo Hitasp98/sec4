@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 exports.selectTbBasedata = (req, res) => { 
-    var d_msg = "SELECT * FROM `tblcommonbasedata`";
+    var d_msg = "SELECT `CommonBaseDataId`, `BaseCode`, `BaseValue`, `CommonBaseTypeID` FROM `tblcommonbasedata` WHERE 1";
     var d_msgs = [req.body.doc_id_msgs];
     db.query(d_msg, d_msgs, (err, rows) => {
       if (err) {
@@ -19,7 +19,18 @@ exports.selectTbBasedata = (req, res) => {
     });
 
 };
-
+exports.selectTbSearch=(req,res)=>{
+  db.query(
+    "SELECT * FROM `tblcommonbasedata` WHERE "+req.body.filter+"  LIKE " + req.body.value,
+    (err, rows) => {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    }
+  );
+}
 exports.InsertBasedata=  (req, res) => {
     db.query(
         'INSERT INTO `tblcommonbasedata` (BaseCode   , BaseValue, CommonBaseDataId ) VALUES ("' +
