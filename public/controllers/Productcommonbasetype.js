@@ -59,7 +59,7 @@ exports.searchTbBaseTypeTitle = (req, res) => {
     }
   );
 }
-exports.InsertBasetype = (req, res) => {
+exports.ws_CreateBaseType = (req, res) => {
   db.query(
     'INSERT INTO `tblcommonbasetype` (CommonBaseTypeId, BaseTypeTitle, BaseTypeCode) VALUES ("' +
     req.body.codeone +
@@ -76,8 +76,8 @@ exports.InsertBasetype = (req, res) => {
     }
   )
 };
-exports.UpdateBasetype = (req, res) => {
-  db.query("UPDATE `tblcommonbasetype` SET `BaseTypeTitle`='" + req.body.nameone + "' where `CommonBaseTypeId`=" + req.body.codeone + ""),
+exports.ws_UpdateBaseType = (req, res) => {
+  db.query("UPDATE `tblcommonbasetype` SET `BaseTypeTitle`='" + req.body.BaseTypeTitle + "',`CommonBaseTypeId`=" + req.body.CommonBaseTypeId + ",BaseCode"+req.body.),
     (err, rows) => {
       if (err) {
         console.log("error ", err);
@@ -86,8 +86,8 @@ exports.UpdateBasetype = (req, res) => {
       }
     }
 }
-exports.DeleteBasetype = (req, res) => {
-  db.query("DELETE FROM `tblcommonbasetype` WHERE `CommonBaseTypeId`=" + req.body.codeone + ""),
+exports.ws_DeleteBaseType = (req, res) => {
+  db.query("DELETE FROM `tblcommonbasetype` WHERE `CommonBaseTypeId`=" + req.body.CommonBaseTypeId + ""),
     (err, rows) => {
       if (err) {
         console.log("error ", err);
