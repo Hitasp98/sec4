@@ -7,4 +7,5 @@ router.post('/selecttblcommonbasedata', Pcommonbasedata.selectTbBasedata);
 router.post('/addUserBasedata', Pcommonbasedata.InsertBasedata);
 router.post('/UpdateBasedata', Pcommonbasedata.UpdateBasedata);
 router.post('/DeleteBasedata',Pcommonbasedata.DeleteBasedata);
+router.post('/selectTbSearch',Pcommonbasedata.selectTbSearch)
 module.exports = router;
