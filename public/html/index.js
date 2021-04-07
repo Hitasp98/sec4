@@ -21,31 +21,63 @@ const btnDeTow = document.querySelector("#btnDeleteTwo")
 const btnSearch = document.querySelector('#btnSearch')
 
 //!!:show data base on table
-function getmsgs1() {
-    $.ajax({
-        type: "POST",
-        url: "/productcommonbasetype/selecttblcommonbasetype",
-        contentType: "application/json",
-        data: JSON.stringify({
-            doc_id_msgs: $("#doct_id").val(),
-
-        }),
-        dataType: "json",
-        success: function (data) {
-            for (row of data) {
-                $("#msg_q").append(
-                    "<tr>" +
-                    "<td>" +
-                    row.BaseTypeTitle +
-                    "</td>" +
-                    "<td>" +
-                    row.CommonBaseTypeId +
-                    " </td>" +
-                    "<tr>"
-                );
-            }
-        },
-    });
+function getmsgs1(vname = 1, vid = 1, vcode = 1) {
+    if (vname === 1 && vid === 1 || vcode === 1) {
+        $.ajax({
+            type: "POST",
+            url: "/productcommonbasetype/selectTbBasetypeone",
+            contentType: "application/json",
+            data: JSON.stringify({
+                doc_id_msgs: $("#doct_id").val(),
+                CommonBaseTypeId: vname,
+                BaseTypeTitle: vid,
+                BaseTypeCode: vcode
+            }),
+            dataType: "json",
+            success: function (data) {
+                for (row of data) {
+                    $("#msg_q").append(
+                        "<tr>" +
+                        "<td>" +
+                        row.BaseTypeTitle +
+                        "</td>" +
+                        "<td>" +
+                        row.CommonBaseTypeId +
+                        " </td>" +
+                        "<tr>"
+                    );
+                }
+            },
+        });
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/productcommonbasetype/selecttblcommonbasetype",
+            contentType: "application/json",
+            data: JSON.stringify({
+                doc_id_msgs: $("#doct_id").val(),
+                CommonBaseTypeId: vname,
+                BaseTypeTitle: vid,
+                BaseTypeCode: vcode
+            }),
+            dataType: "json",
+            success: function (data) {
+                for (row of data) {
+                    $("#msg_q").append(
+                        "<tr>" +
+                        "<td>" +
+                        row.BaseTypeTitle +
+                        "</td>" +
+                        "<td>" +
+                        row.CommonBaseTypeId +
+                        " </td>" +
+                        "<tr>"
+                    );
+                }
+            },
+        });
+    }
 }
 getmsgs1();
 //ajax db select
@@ -63,7 +95,7 @@ function tblcommonbasedata() {
                 $("#dbdataTwo").append(
                     "<tr>" +
                     "<td>" +
-                    row.BaseCode     +
+                    row.BaseCode +
                     "</td>" +
                     "<td>" +
                     row.BaseValue +
@@ -145,7 +177,7 @@ btnCloseTwo2.addEventListener("click", () => {
 btnInsert.addEventListener("click", () => {
     const vname = document.getElementById("nameone").value;
     const vcode = document.getElementById("codeone").value;
-    var s=[];
+    var s = [];
     if (vname == "" || vcode == "") {
 
         alert("epmty")
@@ -156,9 +188,10 @@ btnInsert.addEventListener("click", () => {
             contentType: "application/json",
             data: JSON.stringify({
                 BaseTypeTitle: vname,
-                CommonBaseTypeId: vcode,           
-                     doc_id_msgs: $("#doct_id").val(),
+                CommonBaseTypeId: vcode,
+                doc_id_msgs: $("#doct_id").val(),
             }),
+
             dataType: "json",
             success: function (data) {
                 for (row of data) {
@@ -166,28 +199,47 @@ btnInsert.addEventListener("click", () => {
                     s.push(row)
                 }
                 // console.log(s.length)
-                if(s.length>0){ 
-                    alert("is here")
-                }else{
-                const BaseTypeCode =Math.floor(Math.random()*999)+100
+
                 $.ajax({
                     type: "POST",
-                    url: "/productcommonbasetype/addUserBasetype",
+                    url: "/productcommonbasetype/searchTbBaseTypeTitle",
                     contentType: "application/json",
                     data: JSON.stringify({
-                        nameone: vname,
-                        codeone: vcode,
-                        BaseTypeCode:BaseTypeCode
+                        BaseTypeTitle: vname,
+
                     }),
                     dataType: "json",
+                    success: function (data) {
+                        for (row of data) {
+                            // document.getElementById('msg_q').textContent=row.BaseTypeTitle
+                            s.push(row)
+                        }
+                    }
                 });
-              
+
+                if (s.length > 0) {
+                    alert("is here")
+                }
+                else {
+                    const BaseTypeCode = Math.floor(Math.random() * 999) + 100
+                    $.ajax({
+                        type: "POST",
+                        url: "/productcommonbasetype/addUserBasetype",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            nameone: vname,
+                            codeone: vcode,
+                            BaseTypeCode: BaseTypeCode
+                        }),
+                        dataType: "json",
+                    });
+
+                }
             }
-            }
-            
+
         });
 
-       
+
     }
 });
 btnUpdate.addEventListener("click", () => {
@@ -246,7 +298,7 @@ btnDel.addEventListener("click", () => {
 //             contentType: "application/json",
 //             data: JSON.stringify({
 //                 doc_id_msgs: $("#doct_id").val(),
-    
+
 //             }),
 //             dataType: "json",
 //             success: function (data) {
@@ -296,15 +348,15 @@ btnInsertTwo.addEventListener("click", () => {
     for (var i = 0, len = sNumber.length; i < len; i += 1) {
         randnumber.push(+sNumber.charAt(i))
     }
-    
+
     var rand = Math.floor(Math.random() * 999) + 100
     var random = rand.toString()
     console.log(random)
-    var ins='';
+    var ins = '';
     for (let j = 0; j < 3; j++) {
-        ins+=randnumber[j]
+        ins += randnumber[j]
     }
-    ins+=random
+    ins += random
     if (vname == "" || vcode == "") {
         alert("epmty")
     } else {
@@ -315,7 +367,7 @@ btnInsertTwo.addEventListener("click", () => {
             data: JSON.stringify({
                 nameone: vname,
                 codeone: vcode,
-                idrandom:ins
+                idrandom: ins
 
             }),
             dataType: "json",

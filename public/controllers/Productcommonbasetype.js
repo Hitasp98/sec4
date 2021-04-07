@@ -8,9 +8,20 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+exports.selectTbBasetypeone = (req, res) => {
+  var d_msg = "SELECT `CommonBaseTypeId`, `BaseTypeTitle`, `BaseTypeCode` FROM `tblcommonbasetype` WHERE 1";
+  var d_msgs = [req.body.doc_id_msgs];
+  db.query(d_msg, d_msgs, (err, rows) => {
+    if (err) {
+      console.log("error ", err);
+    } else {
+      res.send(rows);
+    }
+  });
 
+};
 exports.selectTbBasetype = (req, res) => {
-  var d_msg = "SELECT * FROM `tblcommonbasetype`";
+  var d_msg = "SELECT `CommonBaseTypeId`, `BaseTypeTitle`, `BaseTypeCode` FROM `tblcommonbasetype` WHERE "+req.body.CommonBaseTypeId+","+req.body.BaseTypeTitle+","+req.body.BaseTypeCode;
   var d_msgs = [req.body.doc_id_msgs];
   db.query(d_msg, d_msgs, (err, rows) => {
     if (err) {
@@ -26,6 +37,19 @@ exports.searchTbBasetype = (req, res) => {
 
   db.query(
     "SELECT * FROM `tblcommonbasetype` WHERE CommonBaseTypeId  LIKE " + req.body.CommonBaseTypeId,
+    (err, rows) => {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    }
+  );
+}
+exports.searchTbBaseTypeTitle = (req, res) => {
+
+  db.query(
+    "SELECT * FROM `tblcommonbasetype` WHERE BaseTypeTitle LIKE  " + req.body.BaseTypeTitle,
     (err, rows) => {
       if (err) {
         console.log("error ", err);
