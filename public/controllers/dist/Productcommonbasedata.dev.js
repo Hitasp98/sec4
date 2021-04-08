@@ -1,8 +1,8 @@
 "use strict";
 
-var express = require("express");
+var express = require('express');
 
-var bodyParser = require("body-parser");
+var bodyParser = require('body-parser');
 
 var mysql = require('mysql');
 
@@ -14,54 +14,117 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-exports.selectTbBasedata = function (req, res) {
-  var d_msg = "SELECT `CommonBaseDataId`, `BaseCode`, `BaseValue`, `CommonBaseTypeID` FROM `tblcommonbasedata` WHERE 1";
-  var d_msgs = [req.body.doc_id_msgs];
-  db.query(d_msg, d_msgs, function (err, rows) {
+exports.ws_loadBaseValue = function (req, res) {
+  if (req.body.CommonBaseDataId === 1 && req.body.BaseCode === 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = 'SELECT `CommonBaseDataId`, `BaseCode`, `BaseValue`, `CommonBaseTypeID` FROM `tblcommonbasedata` WHERE 1';
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId !== 1 && req.body.BaseCode === 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = 'SELECT * FROM `tblcommonbasedata` WHERE CommonBaseDataId=' + req.body.CommonBaseDataId;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId === 1 && req.body.BaseCode !== 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = 'SELECT * FROM `tblcommonbasedata` WHERE BaseCode=' + req.body.BaseCode;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId === 1 && req.body.BaseCode === 1 && req.body.BaseValue !== 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = 'SELECT * FROM `tblcommonbasedata` WHERE BaseValue=' + req.body.BaseValue;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId === 1 && req.body.BaseCode === 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID !== 1) {
+    var d_msg = 'SELECT * FROM `tblcommonbasedata` WHERE CommonBaseTypeID=' + req.body.CommonBaseTypeID;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        res.send(rows);
+      }
+    });
+  }
+};
+
+exports.ws_createBaseValue = function (req, res) {
+  db.query('INSERT INTO `tblcommonbasedata` (BaseCode,BaseValue, CommonBaseDataId ) VALUES ("' + req.body.codeone + '","' + req.body.nameone + '","' + req.body.idrandom + '")', function (err, rows) {
     if (err) {
-      console.log("error ", err);
+      console.log('error ', err);
     } else {
-      res.send(rows);
+      console.log('insert');
     }
   });
 };
 
-exports.selectTbSearch = function (req, res) {
-  db.query("SELECT * FROM `tblcommonbasedata` WHERE " + req.body.filter + "  LIKE " + req.body.value, function (err, rows) {
+exports.ws_updateBaseValue = function (req, res) {
+  db.query("UPDATE `tblcommonbasedata` SET `BaseValue`='" + req.body.BaseValue + "',CommonBaseDataId='" + req.body.CommonBaseDataId + "' where `BaseCode`=" + req.body.BaseCode + '"CommonBaseTypeId ="' + req.body.CommonBaseTypeId), function (err, rows) {
     if (err) {
-      console.log("error ", err);
+      console.log('error ', err);
     } else {
-      res.send(rows);
-    }
-  });
-};
-
-exports.InsertBasedata = function (req, res) {
-  db.query('INSERT INTO `tblcommonbasedata` (BaseCode   , BaseValue, CommonBaseDataId ) VALUES ("' + req.body.codeone + '","' + req.body.nameone + '","' + req.body.idrandom + '")', function (err, rows) {
-    if (err) {
-      console.log("error ", err);
-    } else {
-      console.log("insert");
-    }
-  });
-};
-
-exports.UpdateBasedata = function (req, res) {
-  db.query("UPDATE `tblcommonbasedata` SET `BaseValue`='" + req.body.nameone + "' where `BaseCode`=" + req.body.codeone + ""), function (err, rows) {
-    if (err) {
-      console.log("error ", err);
-    } else {
-      console.log("Update");
+      console.log('Update');
     }
   };
 };
 
-exports.DeleteBasedata = function (req, res) {
-  db.query("DELETE FROM `tblcommonbasedata` WHERE `BaseCode`=" + req.body.codeone + ""), function (err, rows) {
-    if (err) {
-      console.log("error ", err);
-    } else {
-      console.log("Delete");
-    }
-  };
-};
+exports.ws_deleteBaseValue = function (req, res) {
+  var sum;
+  var tb = ['tblCharityAccounts', 'tblAssignEducationToNeedy', 'tblNeedyFamily', 'tblNeedyHousing', 'tblNeedySickness', 'tblNeedyAccounts', 'tblNonCashRequest', 'tblRequestFlow'];
+
+  for (var i = 0; i <= tb.length; i++) {
+    db.query('SELECT * FROM ' + tb[i] + ' WHERE CommonBaseDataId = ' + req.body.CommonBaseDataId + '', function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        sum++;
+      }
+    });
+  }
+
+  if (sum === 0) {
+    db.query('DELETE FROM `tblcommonbasedata` WHERE `CommonBaseDataId`=' + req.body.CommonBaseDataId + ''), function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        console.log('Delete');
+      }
+    };
+  } else {
+    console.log("foreign key");
+  }
+}; // exports.selectTbSearch = (req, res) => {
+//   db.query(
+//     'SELECT * FROM `tblcommonbasedata` WHERE ' +
+//       req.body.filter +
+//       '  LIKE ' +
+//       req.body.value,
+//     (err, rows) => {
+//       if (err) {
+//         console.log('error ', err)
+//       } else {
+//         res.send(rows)
+//       }
+//     }
+//   )
+// }
