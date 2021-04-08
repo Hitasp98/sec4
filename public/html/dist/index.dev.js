@@ -352,6 +352,21 @@ function ws_createBaseValue(BaseValue, BaseCode, CommonBaseTypeId) {
   location.reload();
 }
 
+function ws_updateBaseValue(BaseCode, BaseValue, CommonBaseTypeId, CommonBaseDataId) {
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasedata/UpdateBasedata',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      BaseCode: BaseCode,
+      BaseValue: BaseValue,
+      CommonBaseTypeId: CommonBaseTypeId,
+      CommonBaseDataId: CommonBaseDataId
+    }),
+    dataType: 'json'
+  });
+}
+
 btnInsertTwo.addEventListener('click', function () {
   var vname = document.getElementById('nameoneTwo').value;
   var vcode = document.getElementById('codeoneTwo').value;
@@ -388,34 +403,48 @@ btnUpdateTwo.addEventListener('click', function () {
   if (vname == '' || vcode == '') {
     alert('epmty');
   } else {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/UpdateBasedata',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        nameone: vname,
-        codeone: vcode
-      }),
-      dataType: 'json'
-    });
+    sNumber = vcode.toString();
+    randnumber = [];
+    insertnumber = [];
+
+    for (var i = 0, len = sNumber.length; i < len; i += 1) {
+      randnumber.push(+sNumber.charAt(i));
+    }
+
+    var rand = Math.floor(Math.random() * 999) + 100;
+    var random = rand.toString();
+    console.log(random);
+    var ins = '';
+
+    for (var j = 0; j < 3; j++) {
+      ins += randnumber[j];
+    }
+
+    ins += random;
+    ws_updateBaseValue(vname, vcode, CommonBaseTypeId, ins);
     location.reload();
   }
 });
+
+function ws_deleteBaseValue(CommonBaseDataId) {
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasedata/DeleteBasedata',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      CommonBaseDataId: CommonBaseDataId
+    }),
+    dataType: 'json'
+  });
+}
+
 btnDeTow.addEventListener('click', function () {
   var vcode = document.getElementById('codeoneTwo2').value;
 
   if (vcode == '') {
     alert('epmty');
   } else {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/DeleteBasedata',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        codeone: vcode
-      }),
-      dataType: 'json'
-    });
+    ws_deleteBaseValue(vcode);
     location.reload();
   }
 }); //!serach 
