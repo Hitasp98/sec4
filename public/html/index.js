@@ -61,160 +61,33 @@ function ws_loadCharityAccounts(
     CommonBaseTypeID = 1
 ) {
     //one try
-    if (
-        CommonBaseDataId === 1 &&
-        BaseCode === 1 &&
-        BaseValue === 1 &&
-        CommonBaseTypeID === 1
-    ) {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasedata/selecttblcommonbasedata',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                doc_id_msgs: $('#doct_id').val()
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    $('#dbdataTwo').append(
-                        '<tr>' +
-                        '<td>' +
-                        row.BaseCode +
-                        '</td>' +
-                        '<td>' +
-                        row.BaseValue +
-                        ' </td>' +
-                        '<tr>'
-                    )
-                }
+    $.ajax({
+        type: 'POST',
+        url: '/productcommonbasedata/selecttblcommonbasedata',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            doc_id_msgs: $('#doct_id').val(),
+            CommonBaseDataId:CommonBaseDataId,
+            BaseValue,BaseValue,
+            BaseCode:BaseCode,
+            CommonBaseTypeID:CommonBaseTypeID
+        }),
+        dataType: 'json',
+        success: function (data) {
+            for (row of data) {
+                $('#dbdataTwo').append(
+                    '<tr>' +
+                    '<td>' +
+                    row.BaseCode +
+                    '</td>' +
+                    '<td>' +
+                    row.BaseValue +
+                    ' </td>' +
+                    '<tr>'
+                )
             }
-        })
-    } else if (
-        CommonBaseDataId !== 1 &&
-        BaseCode === 1 &&
-        BaseValue === 1 &&
-        CommonBaseTypeID === 1
-    ) {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasedata/selectTbSearch',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                doc_id_msgs: $('#doct_id').val(),
-                filter: 'CommonBaseDataId',
-                value: CommonBaseDataId
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    $('#dbdataTwo').append(
-                        '<tr>' +
-                        '<td>' +
-                        row.BaseValue +
-                        '</td>' +
-                        '<td>' +
-                        row.BaseCode +
-                        ' </td>' +
-                        '<tr>'
-                    )
-                }
-            }
-        })
-    } else if (
-        CommonBaseDataId === 1 &&
-        BaseCode !== 1 &&
-        BaseValue === 1 &&
-        CommonBaseTypeID === 1
-    ) {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasedata/selectTbSearch',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                doc_id_msgs: $('#doct_id').val(),
-                filter: 'BaseCode',
-                value: BaseCode
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    $('#dbdataTwo').append(
-                        '<tr>' +
-                        '<td>' +
-                        row.CommonBaseDataId +
-                        '</td>' +
-                        '<td>' +
-                        row.BaseValue +
-                        ' </td>' +
-                        '<tr>'
-                    )
-                }
-            }
-        })
-    } else if (
-        CommonBaseDataId === 1 &&
-        BaseCode === 1 &&
-        BaseValue !== 1 &&
-        CommonBaseTypeID === 1
-    ) {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasedata/selectTbSearch',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                doc_id_msgs: $('#doct_id').val(),
-                filter: 'BaseValue',
-                value: BaseValue
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    $('#dbdataTwo').append(
-                        '<tr>' +
-                        '<td>' +
-                        row.BaseCode +
-                        '</td>' +
-                        '<td>' +
-                        row.CommonBaseDataId +
-                        ' </td>' +
-                        '<tr>'
-                    )
-                }
-            }
-        })
-    } else if (
-        CommonBaseDataId === 1 &&
-        BaseCode === 1 &&
-        BaseValue === 1 &&
-        CommonBaseTypeID !== 1
-    ) {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasedata/selectTbSearch',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                doc_id_msgs: $('#doct_id').val(),
-                filter: 'CommonBaseTypeID',
-                value: CommonBaseTypeID
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    $('#dbdataTwo').append(
-                        '<tr>' +
-                        '<td>' +
-                        row.BaseValue +
-                        '</td>' +
-                        '<td>' +
-                        row.CommonBaseDataId +
-                        ' </td>' +
-                        '<tr>'
-                    )
-                }
-            }
-        })
-    }
+        }
+    })
 }
 ws_loadCharityAccounts()
 //!show insert input
@@ -405,55 +278,22 @@ btnDel.addEventListener('click', () => {
     ws_DeleteBaseType(CommonBaseTypeId)}
 })
 
-btnSearch.addEventListener('click', () => {
-    const CommonBaseTypeId = document.getElementById('inputSearch').value
-    console.log(CommonBaseTypeId)
-
-    if (CommonBaseTypeId == '') {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasetype/selecttblcommonbasetype',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                doc_id_msgs: $('#doct_id').val()
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    $('#msg_q').append(
-                        '<tr>' +
-                        '<td>' +
-                        row.BaseTypeTitle +
-                        '</td>' +
-                        '<td>' +
-                        row.CommonBaseTypeId +
-                        ' </td>' +
-                        '<tr>'
-                    )
-                }
-            }
-        })
-    } else {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasetype/searchBasetype',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                CommonBaseTypeId: CommonBaseTypeId,
-                doc_id_msgs: $('#doct_id').val()
-            }),
-            dataType: 'json',
-            success: function (data) {
-                for (row of data) {
-                    document.getElementById('msg_q').textContent = row.BaseTypeTitle
-                }
-            }
-        })
-        // location.reload();
-    }
-})
 
 //table two
+function ws_createBaseValue(BaseValue,BaseCode,CommonBaseTypeId){
+    $.ajax({
+        type: 'POST',
+        url: '/productcommonbasedata/addUserBasedata',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            BaseValue: BaseValue,
+            BaseCode: BaseCode,
+            CommonBaseTypeId: CommonBaseTypeId
+        }),
+        dataType: 'json'
+    })
+    location.reload()
+}
 btnInsertTwo.addEventListener('click', () => {
     const vname = document.getElementById('nameoneTwo').value
     const vcode = document.getElementById('codeoneTwo').value
@@ -475,18 +315,7 @@ btnInsertTwo.addEventListener('click', () => {
     if (vname == '' || vcode == '') {
         alert('epmty')
     } else {
-        $.ajax({
-            type: 'POST',
-            url: '/productcommonbasedata/addUserBasedata',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                nameone: vname,
-                codeone: vcode,
-                idrandom: ins
-            }),
-            dataType: 'json'
-        })
-        location.reload()
+        ws_loadBaseValue(vname,vcode,ins)
     }
 })
 btnUpdateTwo.addEventListener('click', () => {
@@ -527,3 +356,52 @@ btnDeTow.addEventListener('click', () => {
         location.reload()
     }
 })
+
+//!serach 
+// btnSearch.addEventListener('click', () => {
+//     const CommonBaseTypeId = document.getElementById('inputSearch').value
+//     console.log(CommonBaseTypeId)
+
+//     if (CommonBaseTypeId == '') {
+//         $.ajax({
+//             type: 'POST',
+//             url: '/productcommonbasetype/selecttblcommonbasetype',
+//             contentType: 'application/json',
+//             data: JSON.stringify({
+//                 doc_id_msgs: $('#doct_id').val()
+//             }),
+//             dataType: 'json',
+//             success: function (data) {
+//                 for (row of data) {
+//                     $('#msg_q').append(
+//                         '<tr>' +
+//                         '<td>' +
+//                         row.BaseTypeTitle +
+//                         '</td>' +
+//                         '<td>' +
+//                         row.CommonBaseTypeId +
+//                         ' </td>' +
+//                         '<tr>'
+//                     )
+//                 }
+//             }
+//         })
+//     } else {
+//         $.ajax({
+//             type: 'POST',
+//             url: '/productcommonbasetype/searchBasetype',
+//             contentType: 'application/json',
+//             data: JSON.stringify({
+//                 CommonBaseTypeId: CommonBaseTypeId,
+//                 doc_id_msgs: $('#doct_id').val()
+//             }),
+//             dataType: 'json',
+//             success: function (data) {
+//                 for (row of data) {
+//                     document.getElementById('msg_q').textContent = row.BaseTypeTitle
+//                 }
+//             }
+//         })
+//         // location.reload();
+//     }
+// })

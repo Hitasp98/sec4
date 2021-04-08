@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 exports.ws_loadBaseType = function (req, res) {
-  if (req.body.CommonBaseTypeId === 1 && req.body.BaseTypeCode === 1 && req.body.BaseTypeTitle) {
+  if (req.body.CommonBaseTypeId === 1 && req.body.BaseTypeCode === 1 && req.body.BaseTypeTitle === 1) {
     var d_msg = "SELECT `CommonBaseTypeId`, `BaseTypeTitle`, `BaseTypeCode` FROM `tblcommonbasetype` WHERE 1";
     var d_msgs = [req.body.doc_id_msgs];
     db.query(d_msg, d_msgs, function (err, rows) {
@@ -87,18 +87,7 @@ exports.ws_DeleteBaseType = function (req, res) {
       console.log("Delete");
     }
   };
-}; // exports.selectTbBasetype = (req, res) => {
-//   var d_msg = "SELECT `CommonBaseTypeId`, `BaseTypeTitle`, `BaseTypeCode` FROM `tblcommonbasetype` WHERE " + req.body.CommonBaseTypeId + "," + req.body.BaseTypeTitle + "," + req.body.BaseTypeCode;
-//   var d_msgs = [req.body.doc_id_msgs];
-//   db.query(d_msg, d_msgs, (err, rows) => {
-//     if (err) {
-//       console.log("error ", err);
-//     } else {
-//       res.send(rows);
-//     }
-//   });
-// };
-
+};
 
 exports.searchTbBasetype = function (req, res) {
   db.query("SELECT * FROM `tblcommonbasetype` WHERE BaseTypeCode  LIKE " + req.body.BaseTypeCode, function (err, rows) {

@@ -8,7 +8,7 @@ var router = express.Router();
 
 var Pcommonbasedata = require('../controllers/Productcommonbasedata');
 
-router.post('/selecttblcommonbasedata', Pcommonbasedata.selectTbBasedata);
+router.post('/selecttblcommonbasedata', Pcommonbasedata.ws_loadBaseValue);
 router.post('/addUserBasedata', Pcommonbasedata.InsertBasedata);
 router.post('/UpdateBasedata', Pcommonbasedata.UpdateBasedata);
 router.post('/DeleteBasedata', Pcommonbasedata.DeleteBasedata);

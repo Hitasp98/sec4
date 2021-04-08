@@ -1,5 +1,7 @@
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //button table one
 var btnNew = document.querySelector('#new');
 var btnClose = document.querySelector('#close');
@@ -70,196 +72,49 @@ function ws_loadBaseType() {
 ws_loadBaseType(); //ajax db select
 
 function ws_loadCharityAccounts() {
+  var _JSON$stringify;
+
   var CommonBaseDataId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var BaseCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var BaseValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var CommonBaseTypeID = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-
   //one try
-  if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/selecttblcommonbasedata',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        doc_id_msgs: $('#doct_id').val()
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasedata/selecttblcommonbasedata',
+    contentType: 'application/json',
+    data: JSON.stringify((_JSON$stringify = {
+      doc_id_msgs: $('#doct_id').val(),
+      CommonBaseDataId: CommonBaseDataId,
+      BaseValue: BaseValue
+    }, _defineProperty(_JSON$stringify, "BaseValue", BaseValue), _defineProperty(_JSON$stringify, "BaseCode", BaseCode), _defineProperty(_JSON$stringify, "CommonBaseTypeID", CommonBaseTypeID), _JSON$stringify)),
+    dataType: 'json',
+    success: function success(data) {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
+      try {
+        for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          row = _step2.value;
+          $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseCode + '</td>' + '<td>' + row.BaseValue + ' </td>' + '<tr>');
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
         try {
-          for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            row = _step2.value;
-            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseCode + '</td>' + '<td>' + row.BaseValue + ' </td>' + '<tr>');
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
           }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
         } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
-    });
-  } else if (CommonBaseDataId !== 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/selectTbSearch',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        doc_id_msgs: $('#doct_id').val(),
-        filter: 'CommonBaseDataId',
-        value: CommonBaseDataId
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
-
-        try {
-          for (var _iterator3 = data[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            row = _step3.value;
-            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseValue + '</td>' + '<td>' + row.BaseCode + ' </td>' + '<tr>');
-          }
-        } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-              _iterator3["return"]();
-            }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
-          }
-        }
-      }
-    });
-  } else if (CommonBaseDataId === 1 && BaseCode !== 1 && BaseValue === 1 && CommonBaseTypeID === 1) {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/selectTbSearch',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        doc_id_msgs: $('#doct_id').val(),
-        filter: 'BaseCode',
-        value: BaseCode
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion4 = true;
-        var _didIteratorError4 = false;
-        var _iteratorError4 = undefined;
-
-        try {
-          for (var _iterator4 = data[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-            row = _step4.value;
-            $('#dbdataTwo').append('<tr>' + '<td>' + row.CommonBaseDataId + '</td>' + '<td>' + row.BaseValue + ' </td>' + '<tr>');
-          }
-        } catch (err) {
-          _didIteratorError4 = true;
-          _iteratorError4 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
-              _iterator4["return"]();
-            }
-          } finally {
-            if (_didIteratorError4) {
-              throw _iteratorError4;
-            }
-          }
-        }
-      }
-    });
-  } else if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue !== 1 && CommonBaseTypeID === 1) {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/selectTbSearch',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        doc_id_msgs: $('#doct_id').val(),
-        filter: 'BaseValue',
-        value: BaseValue
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion5 = true;
-        var _didIteratorError5 = false;
-        var _iteratorError5 = undefined;
-
-        try {
-          for (var _iterator5 = data[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-            row = _step5.value;
-            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseCode + '</td>' + '<td>' + row.CommonBaseDataId + ' </td>' + '<tr>');
-          }
-        } catch (err) {
-          _didIteratorError5 = true;
-          _iteratorError5 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
-              _iterator5["return"]();
-            }
-          } finally {
-            if (_didIteratorError5) {
-              throw _iteratorError5;
-            }
-          }
-        }
-      }
-    });
-  } else if (CommonBaseDataId === 1 && BaseCode === 1 && BaseValue === 1 && CommonBaseTypeID !== 1) {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/selectTbSearch',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        doc_id_msgs: $('#doct_id').val(),
-        filter: 'CommonBaseTypeID',
-        value: CommonBaseTypeID
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
-
-        try {
-          for (var _iterator6 = data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            row = _step6.value;
-            $('#dbdataTwo').append('<tr>' + '<td>' + row.BaseValue + '</td>' + '<td>' + row.CommonBaseDataId + ' </td>' + '<tr>');
-          }
-        } catch (err) {
-          _didIteratorError6 = true;
-          _iteratorError6 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
-              _iterator6["return"]();
-            }
-          } finally {
-            if (_didIteratorError6) {
-              throw _iteratorError6;
-            }
-          }
-        }
-      }
-    });
-  }
+    }
+  });
 }
 
 ws_loadCharityAccounts(); //!show insert input
@@ -388,26 +243,26 @@ btnUpdate.addEventListener('click', function () {
     }),
     dataType: 'json',
     success: function success(data) {
-      var _iteratorNormalCompletion7 = true;
-      var _didIteratorError7 = false;
-      var _iteratorError7 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator7 = data[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-          row = _step7.value;
+        for (var _iterator3 = data[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          row = _step3.value;
           code = row.CommonBaseTypeId;
         }
       } catch (err) {
-        _didIteratorError7 = true;
-        _iteratorError7 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion7 && _iterator7["return"] != null) {
-            _iterator7["return"]();
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
           }
         } finally {
-          if (_didIteratorError7) {
-            throw _iteratorError7;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
@@ -425,26 +280,26 @@ btnUpdate.addEventListener('click', function () {
     }),
     dataType: 'json',
     success: function success(data) {
-      var _iteratorNormalCompletion8 = true;
-      var _didIteratorError8 = false;
-      var _iteratorError8 = undefined;
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
 
       try {
-        for (var _iterator8 = data[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-          row = _step8.value;
+        for (var _iterator4 = data[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          row = _step4.value;
           sumBaseTypeTitle += row;
         }
       } catch (err) {
-        _didIteratorError8 = true;
-        _iteratorError8 = err;
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion8 && _iterator8["return"] != null) {
-            _iterator8["return"]();
+          if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+            _iterator4["return"]();
           }
         } finally {
-          if (_didIteratorError8) {
-            throw _iteratorError8;
+          if (_didIteratorError4) {
+            throw _iteratorError4;
           }
         }
       }
@@ -480,84 +335,22 @@ btnDel.addEventListener('click', function () {
     // })
     ws_DeleteBaseType(CommonBaseTypeId);
   }
-});
-btnSearch.addEventListener('click', function () {
-  var CommonBaseTypeId = document.getElementById('inputSearch').value;
-  console.log(CommonBaseTypeId);
-
-  if (CommonBaseTypeId == '') {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasetype/selecttblcommonbasetype',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        doc_id_msgs: $('#doct_id').val()
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion9 = true;
-        var _didIteratorError9 = false;
-        var _iteratorError9 = undefined;
-
-        try {
-          for (var _iterator9 = data[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-            row = _step9.value;
-            $('#msg_q').append('<tr>' + '<td>' + row.BaseTypeTitle + '</td>' + '<td>' + row.CommonBaseTypeId + ' </td>' + '<tr>');
-          }
-        } catch (err) {
-          _didIteratorError9 = true;
-          _iteratorError9 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion9 && _iterator9["return"] != null) {
-              _iterator9["return"]();
-            }
-          } finally {
-            if (_didIteratorError9) {
-              throw _iteratorError9;
-            }
-          }
-        }
-      }
-    });
-  } else {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasetype/searchBasetype',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        CommonBaseTypeId: CommonBaseTypeId,
-        doc_id_msgs: $('#doct_id').val()
-      }),
-      dataType: 'json',
-      success: function success(data) {
-        var _iteratorNormalCompletion10 = true;
-        var _didIteratorError10 = false;
-        var _iteratorError10 = undefined;
-
-        try {
-          for (var _iterator10 = data[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-            row = _step10.value;
-            document.getElementById('msg_q').textContent = row.BaseTypeTitle;
-          }
-        } catch (err) {
-          _didIteratorError10 = true;
-          _iteratorError10 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion10 && _iterator10["return"] != null) {
-              _iterator10["return"]();
-            }
-          } finally {
-            if (_didIteratorError10) {
-              throw _iteratorError10;
-            }
-          }
-        }
-      }
-    }); // location.reload();
-  }
 }); //table two
+
+function ws_createBaseValue(BaseValue, BaseCode, CommonBaseTypeId) {
+  $.ajax({
+    type: 'POST',
+    url: '/productcommonbasedata/addUserBasedata',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      BaseValue: BaseValue,
+      BaseCode: BaseCode,
+      CommonBaseTypeId: CommonBaseTypeId
+    }),
+    dataType: 'json'
+  });
+  location.reload();
+}
 
 btnInsertTwo.addEventListener('click', function () {
   var vname = document.getElementById('nameoneTwo').value;
@@ -584,18 +377,7 @@ btnInsertTwo.addEventListener('click', function () {
   if (vname == '' || vcode == '') {
     alert('epmty');
   } else {
-    $.ajax({
-      type: 'POST',
-      url: '/productcommonbasedata/addUserBasedata',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        nameone: vname,
-        codeone: vcode,
-        idrandom: ins
-      }),
-      dataType: 'json'
-    });
-    location.reload();
+    ws_loadBaseValue(vname, vcode, ins);
   }
 });
 btnUpdateTwo.addEventListener('click', function () {
@@ -636,4 +418,50 @@ btnDeTow.addEventListener('click', function () {
     });
     location.reload();
   }
-});
+}); //!serach 
+// btnSearch.addEventListener('click', () => {
+//     const CommonBaseTypeId = document.getElementById('inputSearch').value
+//     console.log(CommonBaseTypeId)
+//     if (CommonBaseTypeId == '') {
+//         $.ajax({
+//             type: 'POST',
+//             url: '/productcommonbasetype/selecttblcommonbasetype',
+//             contentType: 'application/json',
+//             data: JSON.stringify({
+//                 doc_id_msgs: $('#doct_id').val()
+//             }),
+//             dataType: 'json',
+//             success: function (data) {
+//                 for (row of data) {
+//                     $('#msg_q').append(
+//                         '<tr>' +
+//                         '<td>' +
+//                         row.BaseTypeTitle +
+//                         '</td>' +
+//                         '<td>' +
+//                         row.CommonBaseTypeId +
+//                         ' </td>' +
+//                         '<tr>'
+//                     )
+//                 }
+//             }
+//         })
+//     } else {
+//         $.ajax({
+//             type: 'POST',
+//             url: '/productcommonbasetype/searchBasetype',
+//             contentType: 'application/json',
+//             data: JSON.stringify({
+//                 CommonBaseTypeId: CommonBaseTypeId,
+//                 doc_id_msgs: $('#doct_id').val()
+//             }),
+//             dataType: 'json',
+//             success: function (data) {
+//                 for (row of data) {
+//                     document.getElementById('msg_q').textContent = row.BaseTypeTitle
+//                 }
+//             }
+//         })
+//         // location.reload();
+//     }
+// })

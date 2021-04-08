@@ -14,16 +14,58 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-exports.selectTbBasedata = function (req, res) {
-  var d_msg = "SELECT `CommonBaseDataId`, `BaseCode`, `BaseValue`, `CommonBaseTypeID` FROM `tblcommonbasedata` WHERE 1";
-  var d_msgs = [req.body.doc_id_msgs];
-  db.query(d_msg, d_msgs, function (err, rows) {
-    if (err) {
-      console.log("error ", err);
-    } else {
-      res.send(rows);
-    }
-  });
+exports.ws_loadBaseValue = function (req, res) {
+  if (req.body.CommonBaseDataId === 1 && req.body.BaseCode === 1 && req.body.BaseValue === 1) {
+    var d_msg = "SELECT `CommonBaseDataId`, `BaseCode`, `BaseValue`, `CommonBaseTypeID` FROM `tblcommonbasedata` WHERE 1";
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId !== 1 && req.body.BaseCode === 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = "SELECT * FROM `tblcommonbasedata` WHERE CommonBaseDataId=" + req.body.CommonBaseDataId;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId === 1 && req.body.BaseCode !== 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = "SELECT * FROM `tblcommonbasedata` WHERE BaseCode=" + req.body.BaseCode;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId === 1 && req.body.BaseCode === 1 && req.body.BaseValue !== 1 && req.body.CommonBaseTypeID === 1) {
+    var d_msg = "SELECT * FROM `tblcommonbasedata` WHERE BaseValue=" + req.body.BaseValue;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    });
+  } else if (req.body.CommonBaseDataId === 1 && req.body.BaseCode === 1 && req.body.BaseValue === 1 && req.body.CommonBaseTypeID !== 1) {
+    var d_msg = "SELECT * FROM `tblcommonbasedata` WHERE CommonBaseTypeID=" + req.body.CommonBaseTypeID;
+    var d_msgs = [req.body.doc_id_msgs];
+    db.query(d_msg, d_msgs, function (err, rows) {
+      if (err) {
+        console.log("error ", err);
+      } else {
+        res.send(rows);
+      }
+    });
+  }
 };
 
 exports.selectTbSearch = function (req, res) {
