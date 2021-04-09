@@ -1,16 +1,16 @@
-const express = require('express');
-var mysql = require('mysql');
-const router = express.Router();
-const Pcommonbasetype = require('../controllers/Productcommonbasetype')
+const express = require('express')
+var mysql = require('mysql')
+const router = express.Router()
+const commonbasetype = require('../controllers/commonbasetype')
 
 //tb tblcommonbasetype
-router.post('/selecttblcommonbasetype', Pcommonbasetype.ws_loadBaseType);
-router.post('/addUserBasetype', Pcommonbasetype.ws_CreateBaseType);
-router.post('/UpdateBasetype', Pcommonbasetype.ws_UpdateBaseType);
-router.post('/DeleteBasetype',Pcommonbasetype.ws_DeleteBaseType);
-router.post('/searchTbBasetype',Pcommonbasetype.searchTbBasetype);
-router.post('/searchTbBaseTypeTitle',Pcommonbasetype.searchTbBaseTypeTitle)
+router.post('/selecttblcommonbasetype', commonbasetype.ws_loadBaseType)
+router.post('/addBasetype', commonbasetype.ws_CreateBaseType)
+router.patch('/UpdateBasetype', commonbasetype.ws_UpdateBaseType)
+router.delete('/DeleteBasetype', commonbasetype.ws_DeleteBaseType)
+router.post('/searchTbBasetype', commonbasetype.searchTbBasetype)
+router.post('/searchTbBaseTypeTitle', commonbasetype.searchTbBaseTypeTitle)
 // router.post('/selectTbBasetypeone',Pcommonbasetype.selectTbBasetypeone)
 // routeer.post('/searchTbBasetypeIn',Pcommonbasetype.searchTbBasetypeIn)
 
-module.exports = router;
+module.exports = router

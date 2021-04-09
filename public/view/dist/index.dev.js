@@ -1,7 +1,5 @@
 "use strict";
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //button table one
 var btnNew = document.querySelector('#new');
 var btnClose = document.querySelector('#close');
@@ -25,12 +23,12 @@ var btnDeTow = document.querySelector('#btnDeleteTwo');
 var btnSearch = document.querySelector('#btnSearch'); //!!:show data base on table
 
 function ws_loadBaseType() {
-  var BaseTypeCode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var BaseTypeTitle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var CommonBaseTypeId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var BaseTypeCode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var BaseTypeTitle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var CommonBaseTypeId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   $.ajax({
     type: 'POST',
-    url: '/productcommonbasetype/selecttblcommonbasetype',
+    url: '/commonbasetype/selecttblcommonbasetype',
     contentType: 'application/json',
     data: JSON.stringify({
       doc_id_msgs: $('#doct_id').val(),
@@ -71,23 +69,23 @@ function ws_loadBaseType() {
 
 ws_loadBaseType(); //ajax db select
 
-function ws_loadCharityAccounts() {
-  var _JSON$stringify;
-
-  var CommonBaseDataId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var BaseCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var BaseValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  var CommonBaseTypeID = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+function ws_loadBaseValue() {
+  var CommonBaseDataId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var BaseCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var BaseValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var CommonBaseTypeID = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   //one try
   $.ajax({
     type: 'POST',
-    url: '/productcommonbasedata/selecttblcommonbasedata',
+    url: '/commonbasedata/selecttblcommonbasedata',
     contentType: 'application/json',
-    data: JSON.stringify((_JSON$stringify = {
+    data: JSON.stringify({
       doc_id_msgs: $('#doct_id').val(),
       CommonBaseDataId: CommonBaseDataId,
-      BaseValue: BaseValue
-    }, _defineProperty(_JSON$stringify, "BaseValue", BaseValue), _defineProperty(_JSON$stringify, "BaseCode", BaseCode), _defineProperty(_JSON$stringify, "CommonBaseTypeID", CommonBaseTypeID), _JSON$stringify)),
+      BaseValue: BaseValue,
+      BaseCode: BaseCode,
+      CommonBaseTypeID: CommonBaseTypeID
+    }),
     dataType: 'json',
     success: function success(data) {
       var _iteratorNormalCompletion2 = true;
@@ -117,7 +115,7 @@ function ws_loadCharityAccounts() {
   });
 }
 
-ws_loadCharityAccounts(); //!show insert input
+ws_loadBaseValue(); //!show insert input
 
 btnNew.addEventListener('click', function () {
   document.getElementById('vsave').style.visibility = 'inherit';
@@ -178,12 +176,11 @@ function ws_CreateBaseType(BaseTypeCode, BaseTypeTitle) {
   } else {
     $.ajax({
       type: 'POST',
-      url: '/productcommonbasetype/addUserBasetype',
+      url: '/commonbasetype/addBasetype',
       contentType: 'application/json',
       data: JSON.stringify({
         BaseTypeCode: BaseTypeCode,
-        BaseTypeTitle: BaseTypeTitle,
-        CommonBaseTypeId: CommonBaseTypeId
+        BaseTypeTitle: BaseTypeTitle
       }),
       dataType: 'json'
     });
@@ -195,8 +192,8 @@ function ws_UpdateBaseType(BaseTypeCode, BaseTypeTitle, CommonBaseTypeId) {
     alert('epmty');
   } else {
     $.ajax({
-      type: 'POST',
-      url: '/productcommonbasetype/UpdateBasetype',
+      type: 'patch',
+      url: '/commonbasetype/UpdateBasetype',
       contentType: 'application/json',
       data: JSON.stringify({
         BaseTypeTitle: BaseTypeTitle,
@@ -211,8 +208,8 @@ function ws_UpdateBaseType(BaseTypeCode, BaseTypeTitle, CommonBaseTypeId) {
 
 function ws_DeleteBaseType(CommonBaseTypeId) {
   $.ajax({
-    type: 'POST',
-    url: '/productcommonbasetype/DeleteBasetype',
+    type: 'delete',
+    url: '/commonbasetype/DeleteBasetype',
     contentType: 'application/json',
     data: JSON.stringify({
       CommonBaseTypeId: CommonBaseTypeId
@@ -315,7 +312,7 @@ btnUpdate.addEventListener('click', function () {
 btnDel.addEventListener('click', function () {
   var CommonBaseTypeId = document.getElementById('codeone2').value; // var code
 
-  if (CommonBaseTypeId == "") {
+  if (CommonBaseTypeId == '') {
     alert('epmty');
   } else {
     // $.ajax({
@@ -340,7 +337,7 @@ btnDel.addEventListener('click', function () {
 function ws_createBaseValue(BaseValue, BaseCode, CommonBaseTypeId) {
   $.ajax({
     type: 'POST',
-    url: '/productcommonbasedata/addUserBasedata',
+    url: '/commonbasedata/addBasedata',
     contentType: 'application/json',
     data: JSON.stringify({
       BaseValue: BaseValue,
@@ -354,13 +351,25 @@ function ws_createBaseValue(BaseValue, BaseCode, CommonBaseTypeId) {
 
 function ws_updateBaseValue(BaseCode, BaseValue, CommonBaseTypeId, CommonBaseDataId) {
   $.ajax({
-    type: 'POST',
-    url: '/productcommonbasedata/UpdateBasedata',
+    type: 'patch',
+    url: '/commonbasedata/UpdateBasedata',
     contentType: 'application/json',
     data: JSON.stringify({
       BaseCode: BaseCode,
       BaseValue: BaseValue,
       CommonBaseTypeId: CommonBaseTypeId,
+      CommonBaseDataId: CommonBaseDataId
+    }),
+    dataType: 'json'
+  });
+}
+
+function ws_deleteBaseValue(CommonBaseDataId) {
+  $.ajax({
+    type: 'delete',
+    url: '/commonbasedata/DeleteBasedata',
+    contentType: 'application/json',
+    data: JSON.stringify({
       CommonBaseDataId: CommonBaseDataId
     }),
     dataType: 'json'
@@ -392,7 +401,7 @@ btnInsertTwo.addEventListener('click', function () {
   if (vname == '' || vcode == '') {
     alert('epmty');
   } else {
-    ws_loadBaseValue(vname, vcode, ins);
+    ws_createBaseValue(vname, vcode, ins);
   }
 });
 btnUpdateTwo.addEventListener('click', function () {
@@ -425,19 +434,6 @@ btnUpdateTwo.addEventListener('click', function () {
     location.reload();
   }
 });
-
-function ws_deleteBaseValue(CommonBaseDataId) {
-  $.ajax({
-    type: 'POST',
-    url: '/productcommonbasedata/DeleteBasedata',
-    contentType: 'application/json',
-    data: JSON.stringify({
-      CommonBaseDataId: CommonBaseDataId
-    }),
-    dataType: 'json'
-  });
-}
-
 btnDeTow.addEventListener('click', function () {
   var vcode = document.getElementById('codeoneTwo2').value;
 
@@ -447,7 +443,7 @@ btnDeTow.addEventListener('click', function () {
     ws_deleteBaseValue(vcode);
     location.reload();
   }
-}); //!serach 
+}); //!serach
 // btnSearch.addEventListener('click', () => {
 //     const CommonBaseTypeId = document.getElementById('inputSearch').value
 //     console.log(CommonBaseTypeId)

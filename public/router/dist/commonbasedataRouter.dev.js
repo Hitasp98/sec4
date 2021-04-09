@@ -6,11 +6,11 @@ var mysql = require('mysql');
 
 var router = express.Router();
 
-var Pcommonbasedata = require('../controllers/Productcommonbasedata');
+var commonbasedata = require('../controllers/commonbasedata');
 
-router.post('/selecttblcommonbasedata', Pcommonbasedata.ws_loadBaseValue);
-router.post('/addUserBasedata', Pcommonbasedata.ws_createBaseValue);
-router.post('/UpdateBasedata', Pcommonbasedata.ws_updateBaseValue);
-router.post('/DeleteBasedata', Pcommonbasedata.ws_deleteBaseValue); // router.post('/selectTbSearch',Pcommonbasedata.selectTbSearch)
+router.post('/selecttblcommonbasedata', commonbasedata.ws_loadBaseValue);
+router.post('/addBasedata', commonbasedata.ws_createBaseValue);
+router.patch('/UpdateBasedata', commonbasedata.ws_updateBaseValue);
+router["delete"]('/DeleteBasedata', commonbasedata.ws_deleteBaseValue); // router.post('/selectTbSearch',Pcommonbasedata.selectTbSearch)
 
 module.exports = router;

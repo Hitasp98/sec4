@@ -11,8 +11,8 @@ const bodyParser = require("body-parser");
 ////
 
 // Add the credentials to access your database
-const viewsPath = path.join(__dirname, './html')
-const partialsPath = path.join(__dirname, './html')
+const viewsPath = path.join(__dirname, './view')
+const partialsPath = path.join(__dirname, './view')
 
 // Setup handlebars engine and views location
 app.set('view engine', 'hbs')
@@ -21,12 +21,12 @@ hbs.registerPartials(partialsPath)
 app.use(express.json());
 const db = require('../my-database/config')
 app.use(bodyParser.json());
-app.use(express.static("./html/"));
+app.use(express.static("./view/"));
 app.use(express.urlencoded({ extended: true }));
 const commonbasedataRouter=require('./router/commonbasedataRouter')
-app.use('/productcommonbasedata',commonbasedataRouter)
+app.use('/commonbasedata',commonbasedataRouter)
 const commonbasetypeRouter=require('./router/commonbasetypeRouter')
-app.use('/productcommonbasetype',commonbasetypeRouter)
+app.use('/commonbasetype',commonbasetypeRouter)
 require('./initDB')();
 
 
