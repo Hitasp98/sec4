@@ -8,7 +8,7 @@ var mysql = require('mysql');
 
 var app = express();
 
-var db = require('../../my-database/config');
+var db = require('../model/config');
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -106,23 +106,63 @@ exports.ws_CreateBaseType = function (req, res) {
 };
 
 exports.ws_UpdateBaseType = function (req, res) {
-  db.query("UPDATE `tblcommonbasetype` SET `BaseTypeTitle`='" + req.body.BaseTypeTitle + "' WHERE  `BaseTypeCode`=" + req.body.BaseTypeCode), function (err, rows) {
+  var i = 0;
+  varj = []; //Todo:check
+
+  var d_msg = 'SELECT * FROM `tblcommonbasetype` WHERE CommonBaseTypeId=' + req.body.CommonBaseTypeId;
+  var d_msgs = [req.body.doc_id_msgs];
+  db.query(d_msg, d_msgs, function (err, rows) {
     if (err) {
       console.log('error ', err);
     } else {
-      console.log('Update');
+      j.push(rows);
+
+      if (j.length > 0) {
+        i = 1;
+      }
     }
-  };
+  });
+
+  if (i === 0) {
+    db.query("UPDATE `tblcommonbasetype` SET `BaseTypeTitle`='" + req.body.BaseTypeTitle + ',`BaseTypeCode`=' + req.body.BaseTypeCode + "' WHERE  `CommonBaseTypeId`='" + req.body.CommonBaseTypeId), function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        console.log('Update');
+      }
+    };
+  } else {
+    console.log('not was insert ');
+  }
 };
 
 exports.ws_DeleteBaseType = function (req, res) {
-  db.query('DELETE FROM `tblcommonbasetype` WHERE `CommonBaseTypeId`=' + req.body.CommonBaseTypeId + ''), function (err, rows) {
+  var i = 0;
+  varj = []; //Todo:check
+
+  var d_msg = 'SELECT * FROM `tblcommonbasetype` WHERE CommonBaseTypeId=' + req.body.CommonBaseTypeId;
+  var d_msgs = [req.body.doc_id_msgs];
+  db.query(d_msg, d_msgs, function (err, rows) {
     if (err) {
       console.log('error ', err);
     } else {
-      console.log('Delete');
+      j.push(rows);
+
+      if (j.length > 0) {
+        i = 1;
+      }
     }
-  };
+  });
+
+  if (i === 0) {
+    db.query('DELETE FROM `tblcommonbasetype` WHERE `CommonBaseTypeId`=' + req.body.CommonBaseTypeId + ''), function (err, rows) {
+      if (err) {
+        console.log('error ', err);
+      } else {
+        console.log('Delete');
+      }
+    };
+  }
 };
 
 exports.searchTbBasetype = function (req, res) {

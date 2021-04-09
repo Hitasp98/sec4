@@ -3,19 +3,15 @@ const bodyParser = require('body-parser')
 var mysql = require('mysql')
 const app = express()
 
-const db = require('../../my-database/config')
+const db = require('../model/config')
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 )
 exports.ws_loadBaseValue = (req, res) => {
-  if (
-    req.body.CommonBaseDataId === 1 &&
-    req.body.BaseCode === 1 &&
-    req.body.BaseValue === 1&&
-    req.body.CommonBaseTypeID === 1
-  ) {
+  
+  if (req.body.CommonBaseDataId === null &&req.body.BaseCode === null &&req.body.BaseValue === null&&req.body.CommonBaseTypeID === null) {
     var d_msg =
       'SELECT `CommonBaseDataId`, `BaseCode`, `BaseValue`, `CommonBaseTypeID` FROM `tblcommonbasedata` WHERE 1'
     var d_msgs = [req.body.doc_id_msgs]
@@ -26,12 +22,7 @@ exports.ws_loadBaseValue = (req, res) => {
         res.send(rows)
       }
     })
-  } else if (
-    req.body.CommonBaseDataId !== 1 &&
-    req.body.BaseCode === 1 &&
-    req.body.BaseValue === 1 &&
-    req.body.CommonBaseTypeID === 1
-  ) {
+  } else if (req.body.CommonBaseDataId !== null &&req.body.BaseCode === null &&req.body.BaseValue === null &&req.body.CommonBaseTypeID === null) {
     var d_msg =
       'SELECT * FROM `tblcommonbasedata` WHERE CommonBaseDataId=' +
       req.body.CommonBaseDataId
@@ -43,12 +34,7 @@ exports.ws_loadBaseValue = (req, res) => {
         res.send(rows)
       }
     })
-  } else if (
-    req.body.CommonBaseDataId === 1 &&
-    req.body.BaseCode !== 1 &&
-    req.body.BaseValue === 1 &&
-    req.body.CommonBaseTypeID === 1
-  ) {
+  } else if (req.body.CommonBaseDataId === null &&req.body.BaseCode !== null &&req.body.BaseValue === null &&req.body.CommonBaseTypeID === null) {
     var d_msg =
       'SELECT * FROM `tblcommonbasedata` WHERE BaseCode=' + req.body.BaseCode
     var d_msgs = [req.body.doc_id_msgs]
@@ -59,12 +45,7 @@ exports.ws_loadBaseValue = (req, res) => {
         res.send(rows)
       }
     })
-  } else if (
-    req.body.CommonBaseDataId === 1 &&
-    req.body.BaseCode === 1 &&
-    req.body.BaseValue !== 1 &&
-    req.body.CommonBaseTypeID === 1
-  ) {
+  } else if (req.body.CommonBaseDataId === null &&req.body.BaseCode === null &&req.body.BaseValue !== null &&req.body.CommonBaseTypeID === null) {
     var d_msg =
       'SELECT * FROM `tblcommonbasedata` WHERE BaseValue=' + req.body.BaseValue
     var d_msgs = [req.body.doc_id_msgs]
@@ -75,12 +56,7 @@ exports.ws_loadBaseValue = (req, res) => {
         res.send(rows)
       }
     })
-  } else if (
-    req.body.CommonBaseDataId === 1 &&
-    req.body.BaseCode === 1 &&
-    req.body.BaseValue === 1 &&
-    req.body.CommonBaseTypeID !== 1
-  ) {
+  } else if (req.body.CommonBaseDataId === null &&req.body.BaseCode === null &&req.body.BaseValue === null &&req.body.CommonBaseTypeID !== null) {
     var d_msg =
       'SELECT * FROM `tblcommonbasedata` WHERE CommonBaseTypeID=' +
       req.body.CommonBaseTypeID

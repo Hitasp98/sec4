@@ -8,7 +8,7 @@ var mysql = require('mysql');
 
 var app = express();
 
-var db = require('../../my-database/config');
+var db = require('../model/config');
 
 app.use(bodyParser.urlencoded({
   extended: true
